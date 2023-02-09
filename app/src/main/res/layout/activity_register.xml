@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.example.restaurantapp.ui.register.RegisterViewModel" />
+    </data>
+
+    <ScrollView
+        android:id="@+id/register_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/register_background"
+        >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.register.RegisterActivity"
+        >
+
+        <ImageView
+            android:id="@+id/register_burger_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="110dp"
+            android:src="@drawable/burgerlogo" />
+
+        <TextView
+            android:id="@+id/register_head_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/register_burger_logo"
+            android:text="Register"
+            android:textColor="@color/white"
+            android:textSize="27sp" />
+
+            <LinearLayout
+                android:id="@+id/register_linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/register_head_tv">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/name_Layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:boxBackgroundColor="@color/transparent"
+                    android:textColorHint="@color/white"
+                    app:error="@{vm.nameError}">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Name"
+                        tools:ignore="MissingClass"
+                        android:text="@={vm.name}"
+                        android:textColor="@color/white"
+                        android:backgroundTint="@color/transparent"
+                        android:drawableStart="@drawable/user"
+                        android:drawablePadding="@dimen/edit_text_drawable_padding" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/email_Layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:boxBackgroundColor="@color/transparent"
+                    android:textColorHint="@color/white"
+                    app:error="@{vm.emailError}">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Email"
+                        android:text="@={vm.email}"
+                        android:textColor="@color/white"
+                        android:backgroundTint="@color/transparent"
+                        android:drawableStart="@drawable/email"
+                        android:drawablePadding="@dimen/edit_text_drawable_padding"
+                        android:drawingCacheQuality="high" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/password_Layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textColorHint="@color/white"
+                    app:boxBackgroundColor="@color/transparent"
+                    app:error="@{vm.passwordError}"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Password"
+                        android:text="@={vm.password}"
+                        android:textColor="@color/white"
+                        android:backgroundTint="@color/transparent"
+                        android:drawableStart="@drawable/password"
+                        android:drawablePadding="@dimen/edit_text_drawable_padding" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/button_create_account"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:text="Create Account"
+                    android:background="@drawable/button_background_color"
+                    android:textAllCaps="false"
+                    android:onClick="@{()->vm.createAccount()}"
+                    />
+            </LinearLayout>
+
+        <TextView
+            android:id="@+id/register_or_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/register_linear"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="OR"
+            android:textColor="@color/white"
+            android:layout_margin="12dp"
+            />
+
+        <TextView
+            android:id="@+id/register_do_not_have_account_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/register_or_tv"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Already Have an Account? "
+            android:textColor="@color/white"
+            android:layout_margin="12dp"
+            />
+
+        <TextView
+            android:id="@+id/register_login_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Log in"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/register_do_not_have_account_tv"
+            android:layout_margin="12dp"
+            app:layout_constraintTop_toBottomOf="@id/register_or_tv"
+            android:textColor="@color/purple_700"
+            android:onClick="@{()->vm.openLogin()}"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>
