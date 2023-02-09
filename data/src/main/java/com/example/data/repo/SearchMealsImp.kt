@@ -5,8 +5,10 @@ import androidx.lifecycle.liveData
 import com.example.data.remote.ApiService
 import com.example.domain.util.Resources
 import com.example.domain.repo.SearchRepo
+import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.Dispatchers
 
+@ActivityRetainedScoped
 
 class SearchMealsImp(private val apiService: ApiService) : SearchRepo {
 

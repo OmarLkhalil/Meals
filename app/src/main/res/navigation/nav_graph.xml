@@ -10,9 +10,16 @@
         android:name="com.example.restaurantapp.ui.home.HomeFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
+
         <action
             android:id="@+id/action_mainFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+
+        <action
+            android:id="@+id/action_mainFragment_to_detailsFragment"
+            app:destination="@id/detailsMealsFragment"
+            app:popUpToInclusive="true"/>
+
     </fragment>
 
 
@@ -24,15 +31,20 @@
 
         <action
             android:id="@+id/action_searchFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment"
+            app:destination="@id/detailsMealsFragment"
             app:popUpToInclusive="true"/>
 
     </fragment>
 
     <fragment
-        android:id="@+id/detailsFragment"
+        android:id="@+id/detailsMealsFragment"
         android:name="com.example.restaurantapp.ui.detailsmeal.DetailsMealsFragment"
+        tools:layout="@layout/fragment_meals_details"
         >
-
+        <argument
+            android:name="mealId"
+            app:argType="string"
+            android:defaultValue="1"
+            />
     </fragment>
 </navigation>

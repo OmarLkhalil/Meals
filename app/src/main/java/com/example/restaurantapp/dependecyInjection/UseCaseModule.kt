@@ -1,9 +1,11 @@
 package com.example.restaurantapp.dependecyInjection
 
 import com.example.domain.repo.CateRepo
+import com.example.domain.repo.DetailsRepo
 import com.example.domain.repo.MealRepo
 import com.example.domain.repo.SearchRepo
 import com.example.domain.usecase.CateUseCase
+import com.example.domain.usecase.DetailsUseCase
 import com.example.domain.usecase.MealUseCase
 import com.example.domain.usecase.SearchUseCase
 import dagger.Module
@@ -32,4 +34,10 @@ object UseCaseModule {
     fun getSearchUseCase(searchRepo: SearchRepo): SearchUseCase {
         return SearchUseCase(searchRepo)
     }
+
+    @Provides
+    fun getDetailUseCase(detailRepo: DetailsRepo): DetailsUseCase{
+        return DetailsUseCase(detailRepo)
+    }
+
 }

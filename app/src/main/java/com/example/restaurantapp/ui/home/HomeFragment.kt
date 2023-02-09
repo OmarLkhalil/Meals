@@ -1,6 +1,5 @@
 package com.example.restaurantapp.ui.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,13 +10,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-
-import com.example.domain.entity.MealsItem
 import com.example.restaurantapp.R
 import com.example.restaurantapp.databinding.FragmentMainBinding
-import com.example.restaurantapp.ui.detailscategory.DetailsCategoryActivity
-import com.example.restaurantapp.ui.detailsmeal.DetailsMealsFragment
-import com.restaurantapp.domain.entity.CategoriesItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -73,7 +67,7 @@ class HomeFragment: Fragment() {
         //The "viewModel.getMeals()"
         // method call fetches the meals from the API and stores them in the "HomeViewModel".
         mealViewModel.getMeals()
-        val mealsAdapter = MealAdapter()
+        val mealsAdapter = MealAdapter(requireContext())
 
 
         //The lifecycleScope.launch block is a coroutine that runs in the lifecycle scope of the MainActivity.
@@ -96,35 +90,18 @@ class HomeFragment: Fragment() {
 
         lifecycleScope.launch {
             mealViewModel._meals.collect{
-
                 mealsAdapter.submitList(it?.meals)
                 mealRecView.adapter = mealsAdapter
             }
         }
 
-        categoriesAdapter.onItemClickListener = object: CateAdapter.OnItemClickListener{
-            override fun onItemClickListener(position: Int, item: CategoriesItem) {
-                val intent = Intent(requireContext(), DetailsCategoryActivity::class.java)
-                intent.putExtra("image", item.strCategoryThumb)
-                intent.putExtra("details", item.strCategoryDescription)
-                startActivity(intent)
-            }
-        }
-
-        mealsAdapter.onItemClickListener = object: MealAdapter.OnItemClickListener{
-            override fun onItemClickListener(position: Int, item: MealsItem) {
-                val intent = Intent(requireContext(), DetailsMealsFragment::class.java)
-                intent.putExtra("image", item.strMealThumb)
-                intent.putExtra("details", item.strInstructions)
-                startActivity(intent)
-            }
-        }
     }
 
     private fun moveToSearchScreen() {
         binding.searchBoxMainId.setOnClickListener {
             navController= Navigation.findNavController(it)
-            navController.navigate(R.id.action_mainFragment_to_searchFragment)
+            val action = HomeFragmentDirections.actionMainFragmentToSearchFragment()
+            navController.navigate(action)
         }
     }
 }

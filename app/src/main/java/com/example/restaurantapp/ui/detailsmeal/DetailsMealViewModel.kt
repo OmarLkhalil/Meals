@@ -1,6 +1,12 @@
 package com.example.restaurantapp.ui.detailsmeal
 
-import com.example.data.base.BaseViewModel
+import androidx.lifecycle.ViewModel
+import com.example.domain.repo.DetailsRepo
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class DetailsMealViewModel: BaseViewModel<Navigator>() {
+@HiltViewModel
+class DetailsMealViewModel @Inject constructor(private val detailsRepo: DetailsRepo): ViewModel() {
+    suspend fun getMealsDetails(mealId:String) = detailsRepo.getDetailsResult(mealId)
+
 }

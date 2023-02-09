@@ -2,9 +2,11 @@ package com.example.restaurantapp.dependecyInjection
 
 import com.example.data.remote.ApiService
 import com.example.data.repo.CategoriesRepImp
+import com.example.data.repo.DetailsRepImpl
 import com.example.data.repo.MealsRepImp
 import com.example.data.repo.SearchMealsImp
 import com.example.domain.repo.CateRepo
+import com.example.domain.repo.DetailsRepo
 import com.example.domain.repo.MealRepo
 import com.example.domain.repo.SearchRepo
 import dagger.Module
@@ -29,9 +31,13 @@ object RepoModule {
         return MealsRepImp(apiService)
     }
 
-
     @Provides
     fun provideSearchRepo(apiService: ApiService): SearchRepo{
         return SearchMealsImp(apiService)
+    }
+
+    @Provides
+    fun provideDetailsRepo(apiService: ApiService): DetailsRepo{
+        return DetailsRepImpl(apiService)
     }
 }

@@ -11,4 +11,7 @@
     <color name="dark_orange">#CC4B00</color>
     <color name="transparent">#00000000</color>
     <color name="button_color">#DC674E</color>
+    <color name="yt_color">#EC2D2D</color>
+    <color name="src_color">#2A7E2F</color>
+
 </resources>
