@@ -1,15 +1,24 @@
 package com.example.restaurantapp.ui.register
 
+import android.view.View
 import androidx.databinding.ObservableField
+import androidx.navigation.NavController
+import androidx.navigation.Navigation.findNavController
 import com.example.restaurantapp.DataUtils
 import com.example.data.base.BaseViewModel
 import com.example.domain.util.addUserToFireStore
 import com.example.domain.entity.AppUser
+import com.example.restaurantapp.R
+import com.example.restaurantapp.databinding.FragmentRegisterBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 
-class RegisterViewModel: BaseViewModel<Navigator>() {
+class RegisterViewModel: BaseViewModel() {
+
+    lateinit var navController: NavController
+
+    lateinit var binding: FragmentRegisterBinding
 
     val name = ObservableField<String>()
     val nameError = ObservableField<String>()
@@ -37,7 +46,7 @@ class RegisterViewModel: BaseViewModel<Navigator>() {
                 } else {
                     //show success message
                     //messageLiveData.value = "success registration"
-                    //navigator?.openHomeScreen()
+                    navController.navigate(R.id.actionRegister_toHome)
                     createFirestoreUser(task.result.user?.uid)
                 }
             }
@@ -53,15 +62,16 @@ class RegisterViewModel: BaseViewModel<Navigator>() {
         addUserToFireStore(user, {
             showLoading.value = false
             DataUtils.user = user
-            navigator?.openHomeScreen()
+
+
         }, {
             showLoading.value = false
             messageLiveData.value = it.localizedMessage
         })
     }
 
-    fun openLogin(){
-        navigator?.openLoginScreen()
+    fun navigateToLoginFragment(view: View) {
+        findNavController(view).navigate(R.id.actionRegister_toLogin)
     }
 
     private fun validate(): Boolean {

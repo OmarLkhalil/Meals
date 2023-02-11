@@ -1,15 +1,24 @@
 package com.example.restaurantapp.ui.login
 
+import android.view.View
 import androidx.databinding.ObservableField
+import androidx.navigation.NavController
+import androidx.navigation.Navigation.findNavController
 import com.example.restaurantapp.DataUtils
 import com.example.data.base.BaseViewModel
 import com.example.domain.util.signIn
 import com.example.domain.entity.AppUser
+import com.example.restaurantapp.R
+import com.example.restaurantapp.databinding.FragmentLoginBinding
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class LoginViewModel: BaseViewModel<Navigator>() {
+class LoginViewModel: BaseViewModel() {
+
+    lateinit var navController: NavController
+
+    lateinit var binding: FragmentLoginBinding
 
     val email = ObservableField<String>()
     val emailError = ObservableField<String>()
@@ -35,7 +44,7 @@ class LoginViewModel: BaseViewModel<Navigator>() {
                 } else {
                     //show success message
                     //messageLiveData.value = "success Login"
-                    //navigator?.openHomeScreen()
+                    navController.navigate(R.id.action_login_to_home)
                     checkUserFromFirestore(task.result.user?.uid)
                 }
             }
@@ -51,7 +60,6 @@ class LoginViewModel: BaseViewModel<Navigator>() {
                 return@OnSuccessListener
             } else {
                 DataUtils.user = user
-                navigator?.openHomeScreen()
             }
         }, onFailureListener = {
             showLoading.value = false
@@ -59,6 +67,9 @@ class LoginViewModel: BaseViewModel<Navigator>() {
         })
     }
 
+    fun navigateToRegister(view: View) {
+        findNavController(view).navigate(R.id.actionLogin_toRegister)
+    }
 
     private fun validate(): Boolean {
         var valid = true
@@ -77,7 +88,5 @@ class LoginViewModel: BaseViewModel<Navigator>() {
         return valid
     }
 
-    fun openRegister() {
-        navigator?.openRegisterScreen()
-    }
+
 }

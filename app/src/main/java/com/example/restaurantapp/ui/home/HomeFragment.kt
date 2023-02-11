@@ -1,9 +1,13 @@
 package com.example.restaurantapp.ui.home
 
 import android.os.Bundle
+import android.provider.Settings.Global
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -12,7 +16,13 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.restaurantapp.R
 import com.example.restaurantapp.databinding.FragmentMainBinding
+import com.example.restaurantapp.ui.MainActivity
+import com.example.restaurantapp.ui.home.categories.CateAdapter
+import com.example.restaurantapp.ui.home.categories.CateViewModel
+import com.example.restaurantapp.ui.home.meals.MealAdapter
+import com.example.restaurantapp.ui.home.meals.MealsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 //The class is annotated with "@AndroidEntryPoint",
@@ -50,9 +60,29 @@ class HomeFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         init()
         moveToSearchScreen()
+
+        val activity = activity as MainActivity
+        activity.let {
+            val toggle = ActionBarDrawerToggle(
+                it,
+                activity.drawerLayout,
+                activity.toolBar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close
+            )
+            activity.drawerLayout.addDrawerListener(toggle)
+            toggle.syncState()
+        }
+
+        activity.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
     }
 
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        val activity = activity as MainActivity
+        activity.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+    }
     private fun init() {
 
         val categoryRecView = requireView().findViewById<RecyclerView>(R.id.cate_rec)

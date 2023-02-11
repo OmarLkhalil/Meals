@@ -9,7 +9,6 @@ import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.Dispatchers
 
 @ActivityRetainedScoped
-
 class SearchMealsImp(private val apiService: ApiService) : SearchRepo {
 
     override suspend fun getSearchResult(mealName: String?) = liveData(Dispatchers.IO) {

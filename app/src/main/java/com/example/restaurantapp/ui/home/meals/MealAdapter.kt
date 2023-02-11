@@ -1,4 +1,4 @@
-package com.example.restaurantapp.ui.home
+package com.example.restaurantapp.ui.home.meals
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,12 +10,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.domain.entity.MealsItem
-import com.example.restaurantapp.databinding.CateItemBinding
 import com.example.restaurantapp.databinding.MealItemBinding
-import com.restaurantapp.domain.entity.CategoriesItem
+import com.example.restaurantapp.ui.home.HomeFragmentDirections
 
 
-class MealAdapter(private val context: Context) : ListAdapter<MealsItem, MealAdapter.ViewHolder>(MealDiffCallback()) {
+class MealAdapter(private val context: Context) : ListAdapter<MealsItem, MealAdapter.ViewHolder>(
+    MealDiffCallback()
+) {
 
     private lateinit var navController: NavController
 
@@ -32,13 +33,16 @@ class MealAdapter(private val context: Context) : ListAdapter<MealsItem, MealAda
 
         holder.itemView.setOnClickListener{
             navController = Navigation.findNavController(it)
-            val action = meal.idMeal?.let { it1 ->  HomeFragmentDirections.actionMainFragmentToDetailsFragment(mealId = it1) }
+            val action = meal.idMeal?.let { it1 ->
+                HomeFragmentDirections.actionMainFragmentToDetailsFragment(
+                    mealId = it1
+                )
+            }
             if (action != null) {
                 navController.navigate(action)
             }
         }
     }
-
 
     class ViewHolder(val itemBinding: MealItemBinding) : RecyclerView.ViewHolder(itemBinding.root) {
     }

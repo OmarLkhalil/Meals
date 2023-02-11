@@ -14,7 +14,6 @@ class DetailsCategoryActivity : BaseActivity<ActivityDetailsCategoryBinding, Det
         super.onCreate(savedInstanceState)
 
         viewDataBinding.vm = viewModel
-        viewModel.navigator = this
 
         val details = intent.getStringExtra("details")
         viewDataBinding.detailsTv.text = details
@@ -32,4 +31,5 @@ class DetailsCategoryActivity : BaseActivity<ActivityDetailsCategoryBinding, Det
     override fun initViewModel(): DetailsCategoryViewModel {
         return ViewModelProvider(this)[DetailsCategoryViewModel::class.java]
     }
+
 }
