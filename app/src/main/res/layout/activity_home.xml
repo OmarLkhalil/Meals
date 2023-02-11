@@ -21,9 +21,10 @@
             android:id="@+id/main_toolbar"
             android:elevation="0dp"
             android:background="@color/transparent"
-            app:navigationIcon="@drawable/menu">
-
+            app:navigationIconTint="@color/white"
+            >
         </com.google.android.material.appbar.MaterialToolbar>
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -40,7 +41,7 @@
         android:layout_height="0dp"
         android:name="androidx.navigation.fragment.NavHostFragment"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/nav_graph"
+        app:navGraph="@navigation/home_nav_graph"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

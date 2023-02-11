@@ -1,9 +1,10 @@
 package com.example.domain.repo
 
-import androidx.lifecycle.LiveData
 import com.example.domain.entity.MealsItem
 import com.example.domain.util.Resources
+import kotlinx.coroutines.flow.Flow
+
 
 interface SearchRepo {
-    suspend fun getSearchResult(mealName: String?) : LiveData<Resources<List<MealsItem?>?>>
+    fun getSearchResult(mealName: String?): Flow<Resources<List<MealsItem?>?>>
 }

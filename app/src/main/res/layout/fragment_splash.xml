@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.splash.SplashFragment">
+        tools:context=".ui.auth.splash.SplashFragment">
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewpager"

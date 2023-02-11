@@ -122,7 +122,7 @@ data class MealsItem(
 	val strDrinkAlternate: Any? = null,
 
 	@field:SerializedName("strSource")
-	val strSource: Any? = null,
+	val strSource: String? = null,
 
 	@field:SerializedName("strMeasure9")
 	val strMeasure9: String? = null,

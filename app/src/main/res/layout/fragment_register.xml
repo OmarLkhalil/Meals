@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vm"
-            type="com.example.restaurantapp.ui.register.RegisterViewModel" />
+            type="com.example.restaurantapp.ui.auth.register.RegisterViewModel" />
     </data>
 
     <ScrollView

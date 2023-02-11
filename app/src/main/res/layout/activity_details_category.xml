@@ -7,7 +7,7 @@
     <data>
         <variable
             name="vm"
-            type="com.example.restaurantapp.ui.detailscategory.DetailsCategoryViewModel" />
+            type="com.example.restaurantapp.ui.main.detailscategory.DetailsCategoryViewModel" />
     </data>
 
     <ScrollView

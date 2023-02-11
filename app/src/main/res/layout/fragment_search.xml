@@ -21,10 +21,11 @@
             android:layout_margin="16dp"
             app:cardCornerRadius="15dp"
             app:cardElevation="8dp"
+            android:backgroundTint="#263238"
+
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-
             >
 
             <LinearLayout
@@ -32,7 +33,6 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="horizontal"
-
                 >
 
                 <ImageView
@@ -53,8 +53,8 @@
                     android:gravity="start|top"
                     android:hint="Fine a Meal"
                     android:inputType="textMultiLine"
-                    android:textColor="#4F4F4F"
-                    android:textColorHint="#4F4F4F"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
                     />
             </LinearLayout>
 

@@ -4,5 +4,4 @@ enum class Status {
     LOADING,
     SUCCESS,
     FAIL
-
 }

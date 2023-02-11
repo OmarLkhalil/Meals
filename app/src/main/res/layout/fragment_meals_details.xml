@@ -22,6 +22,7 @@
                 android:id="@+id/imv_header"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
+                android:scaleType="centerCrop"
                 app:layout_constraintTop_toTopOf="parent"
                 />
 
@@ -137,6 +138,7 @@
                             android:orientation="horizontal">
 
                             <LinearLayout
+                                android:id="@+id/first_column"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -153,6 +155,7 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/second_column"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -173,71 +176,37 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <LinearLayout
-                    android:layout_width="300dp"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="20dp"
                     android:orientation="horizontal"
                     android:layout_gravity="center"
+                    android:layout_marginBottom="5dp"
                     android:padding="8dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ingredients_container"
+                    app:layout_constraintBottom_toBottomOf="@id/imv_header"
+                    app:layout_constraintEnd_toEndOf="@id/imv_header"
                     >
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/youtube_card"
-                        android:layout_weight="1"
-                        app:cardUseCompatPadding="true"
-                        app:cardBackgroundColor="@color/yt_color"
-                        app:cardElevation="0dp"
-                        app:cardCornerRadius="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp">
-
-                        <TextView
-                            android:background="?attr/selectableItemBackground"
-                            android:clickable="true"
-                            android:focusable="true"
+                        <androidx.appcompat.widget.AppCompatImageButton
                             android:id="@+id/youtube"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="YouTube"
-                            android:padding="14dp"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/youtube"
                             android:textSize="16sp"
-                            android:textColor="@color/white"
                             android:gravity="center"
-                            android:drawablePadding="10dp"
+                            android:adjustViewBounds="true"
                             />
-                    </androidx.cardview.widget.CardView>
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/source_card"
-                        android:layout_weight="1"
-                        app:cardUseCompatPadding="true"
-                        app:cardBackgroundColor="@color/src_color"
-                        app:cardElevation="0dp"
-                        app:cardCornerRadius="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp">
-
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatImageButton
                             android:id="@+id/source"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:background="?attr/selectableItemBackground"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Source"
-                            android:padding="14dp"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/source"
                             android:textSize="16sp"
-                            android:textColor="@color/white"
                             android:gravity="center"
-                            android:drawablePadding="10dp"
+                            android:adjustViewBounds="true"
                             />
-                    </androidx.cardview.widget.CardView>
+
 
                 </LinearLayout>
 

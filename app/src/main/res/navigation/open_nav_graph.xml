@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/open_nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.restaurantapp.ui.auth.splash.SplashFragment"
+        >
+
+        <action
+            android:id="@+id/action_Splash_to_RegisterFragment"
+            app:destination="@+id/registerFragment"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+
+            >
+        </action>
+
+        <action
+            android:id="@+id/actionSplash_to_HomeFragment"
+            app:destination="@+id/mainFragment"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            >
+
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.restaurantapp.ui.auth.register.RegisterFragment"
+        >
+        <action
+            android:id="@+id/actionRegister_toHome"
+            app:destination="@+id/mainFragment"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            >
+        </action>
+        <action
+            android:id="@+id/actionRegister_toLogin"
+            app:destination="@+id/loginFragment"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popUpToInclusive="true"
+            >
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.restaurantapp.ui.auth.login.LoginFragment"
+        >
+
+        <action
+            android:id="@+id/actionLogin_toRegister"
+            app:destination="@+id/registerFragment"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popUpToInclusive="true"
+            >
+        </action>
+
+        <action
+            android:id="@+id/action_login_to_home"
+            app:destination="@+id/mainFragment"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popUpToInclusive="true"
+            >
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.restaurantapp.ui.main.home.HomeFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+
+        <action
+            android:id="@+id/action_mainFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+
+        <action
+            android:id="@+id/action_mainFragment_to_detailsFragment"
+            app:destination="@id/detailsMealsFragment"
+            app:popUpToInclusive="true"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.restaurantapp.ui.main.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+
+        <action
+            android:id="@+id/action_searchFragment_to_detailsFragment"
+            app:destination="@id/detailsMealsFragment"
+            app:popUpToInclusive="true"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailsMealsFragment"
+        android:name="com.example.restaurantapp.ui.main.detailsmeal.DetailsMealsFragment"
+        tools:layout="@layout/fragment_meals_details"
+        >
+        <argument
+            android:name="mealId"
+            app:argType="string"
+            android:defaultValue="1"
+            />
+    </fragment>
+
+</navigation>

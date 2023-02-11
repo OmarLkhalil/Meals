@@ -31,7 +31,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-
                 android:layout_margin="@dimen/full_margin" />
 
             <LinearLayout
@@ -53,16 +52,19 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_baseline_search_24"
                     android:layout_margin="8dp"
-                    android:id="@+id/search_icon" />
+                    android:id="@+id/search_icon"
+                    />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
                     android:gravity="start|center"
-                    android:text="Fine a Meal"
+                    android:text="Find a Meal"
                     android:textColor="#ddd"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:backgroundTint="#263238"
+                    />
 
             </LinearLayout>
 
