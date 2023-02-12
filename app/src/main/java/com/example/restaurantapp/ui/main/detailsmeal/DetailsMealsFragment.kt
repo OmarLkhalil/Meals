@@ -24,9 +24,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.net.MalformedURLException
-import java.net.URL
-
 
 class DetailsMealsFragment : Fragment() {
 
@@ -109,8 +106,6 @@ class DetailsMealsFragment : Fragment() {
             meal.strIngredient19,
             meal.strIngredient20
         ).filter { it.toString().isNotBlank() }
-
-
         return ingredients.joinToString(separator = "\n")
     }
 
@@ -132,5 +127,4 @@ class DetailsMealsFragment : Fragment() {
         val implicitIntent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
         activity?.startActivity(implicitIntent)
     }
-
 }

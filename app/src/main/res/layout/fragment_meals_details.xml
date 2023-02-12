@@ -51,9 +51,6 @@
                     app:layout_constraintTop_toBottomOf="@id/meal_cate"
                     />
 
-
-
-
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/ins_container"
                     android:layout_width="match_parent"
@@ -66,6 +63,34 @@
                     app:cardUseCompatPadding="true"
                     app:layout_constraintTop_toBottomOf="@id/meal_name"
                     >
+
+                    <LinearLayout
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="top|right"
+                        android:padding="8dp"
+                        android:layout_marginBottom="@dimen/half_margin"
+                        >
+                        <androidx.appcompat.widget.AppCompatImageButton
+                            android:id="@+id/youtube"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/youtube"
+                            android:textSize="16sp"
+                            android:gravity="center"
+                            android:adjustViewBounds="true"
+                            />
+                        <androidx.appcompat.widget.AppCompatImageButton
+                            android:id="@+id/source"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/source"
+                            android:textSize="16sp"
+                            android:gravity="center"
+                            android:adjustViewBounds="true"
+                            />
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_height="wrap_content"
@@ -98,6 +123,7 @@
                         android:paddingBottom="15dp"
                         android:textColor="@color/white"
                         android:textSize="16sp"
+                        android:layout_marginTop="@dimen/full_margin"
                         />
 
                     </LinearLayout>
@@ -136,14 +162,12 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="20dp"
                             android:orientation="horizontal">
-
                             <LinearLayout
                                 android:id="@+id/first_column"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:orientation="vertical">
-
                                 <TextView
                                     android:id="@+id/ingredient"
                                     android:layout_width="match_parent"
@@ -160,7 +184,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:orientation="vertical">
-
                                 <TextView
                                     android:id="@+id/measure"
                                     android:layout_width="match_parent"
@@ -172,46 +195,8 @@
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
-
                 </com.google.android.material.card.MaterialCardView>
 
-                <LinearLayout
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="5dp"
-                    android:padding="8dp"
-                    app:layout_constraintBottom_toBottomOf="@id/imv_header"
-                    app:layout_constraintEnd_toEndOf="@id/imv_header"
-                    >
-
-                        <androidx.appcompat.widget.AppCompatImageButton
-                            android:id="@+id/youtube"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:background="@drawable/youtube"
-                            android:textSize="16sp"
-                            android:gravity="center"
-                            android:adjustViewBounds="true"
-                            />
-
-                        <androidx.appcompat.widget.AppCompatImageButton
-                            android:id="@+id/source"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:background="@drawable/source"
-                            android:textSize="16sp"
-                            android:gravity="center"
-                            android:adjustViewBounds="true"
-                            />
-
-
-                </LinearLayout>
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </androidx.core.widget.NestedScrollView>
-
 </layout>

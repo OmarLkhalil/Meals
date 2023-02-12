@@ -66,7 +66,7 @@ class HomeFragment: Fragment() {
         //The "viewModel.getCategories()"
         // method call fetches the categories from the API and stores them in the "HomeViewModel".
         cateViewModel.getCategories()
-        val categoriesAdapter = CateAdapter()
+        val categoriesAdapter = CateAdapter(requireContext())
 
 
         //The "viewModel.getMeals()"

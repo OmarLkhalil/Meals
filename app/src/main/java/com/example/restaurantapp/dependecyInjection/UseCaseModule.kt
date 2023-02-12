@@ -1,13 +1,7 @@
 package com.example.restaurantapp.dependecyInjection
 
-import com.example.domain.repo.CateRepo
-import com.example.domain.repo.DetailsRepo
-import com.example.domain.repo.MealRepo
-import com.example.domain.repo.SearchRepo
-import com.example.domain.usecase.CateUseCase
-import com.example.domain.usecase.DetailsUseCase
-import com.example.domain.usecase.MealUseCase
-import com.example.domain.usecase.SearchUseCase
+import com.example.domain.repo.*
+import com.example.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,25 +13,24 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 object UseCaseModule {
-
     @Provides
     fun getUseCase(cateRepo: CateRepo): CateUseCase {
         return CateUseCase(cateRepo)
     }
-
     @Provides
     fun getMealUseCase(mealRepo: MealRepo): MealUseCase {
         return MealUseCase(mealRepo)
     }
-
     @Provides
     fun getSearchUseCase(searchRepo: SearchRepo): SearchUseCase {
         return SearchUseCase(searchRepo)
     }
-
     @Provides
-    fun getDetailUseCase(detailRepo: DetailsRepo): DetailsUseCase{
+    fun getDetailUseCase(detailRepo: MealDetailsRepo): DetailsUseCase{
         return DetailsUseCase(detailRepo)
     }
-
+    @Provides
+    fun getCateDetailUseCase(detailRepo: CateDetailsRepo): CateDetailsUseCase{
+        return CateDetailsUseCase(detailRepo)
+    }
 }

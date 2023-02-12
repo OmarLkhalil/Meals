@@ -11,7 +11,7 @@ interface ApiService {
    @GET("categories.php")
    suspend fun getCategories() : Category
 
-   @GET("search.php?f=b")
+   @GET("search.php?f=c")
    suspend fun getMeals(): Meals
 
    @GET("search.php")
@@ -19,5 +19,8 @@ interface ApiService {
 
    @GET("lookup.php")
    suspend fun getMealDetails(@Query("i") mealId:String) : Response<Meals>
+
+   @GET("categories.php")
+   suspend fun getCateDetails(@Query("3141231231231231231231231231231231231231231") mealId:String) : Response<Category>
 
 }

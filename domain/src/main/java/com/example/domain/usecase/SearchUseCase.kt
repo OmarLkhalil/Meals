@@ -4,7 +4,6 @@ import com.example.domain.entity.MealsItem
 import com.example.domain.repo.SearchRepo
 import com.example.domain.util.Resources
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 
 class SearchUseCase(private val searchResult: SearchRepo) {
 

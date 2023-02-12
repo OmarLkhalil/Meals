@@ -20,7 +20,7 @@ class MealsViewModel @Inject constructor(private val getMealsUseCase: MealUseCas
         viewModelScope.launch{
             try {
                 meals.value = getMealsUseCase()
-            } catch (e:java.lang.Exception){
+            } catch (_:java.lang.Exception){
 
             }
         }

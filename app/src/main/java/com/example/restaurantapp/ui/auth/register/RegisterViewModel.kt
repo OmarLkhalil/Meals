@@ -47,12 +47,12 @@ class RegisterViewModel: BaseViewModel() {
                     //show success message
                     //messageLiveData.value = "success registration"
                     navController.navigate(R.id.actionRegister_toHome)
-                    createFirestoreUser(task.result.user?.uid)
+                    createFireStoreUser(task.result.user?.uid)
                 }
             }
     }
 
-    private fun createFirestoreUser(uid: String?) {
+    private fun createFireStoreUser(uid: String?) {
         showLoading.value = true
         val user = AppUser(
             id = uid,

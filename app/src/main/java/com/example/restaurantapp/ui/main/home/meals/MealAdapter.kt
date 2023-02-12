@@ -44,8 +44,7 @@ class MealAdapter(private val context: Context) : ListAdapter<MealsItem, MealAda
         }
     }
 
-    class ViewHolder(val itemBinding: MealItemBinding) : RecyclerView.ViewHolder(itemBinding.root) {
-    }
+    class ViewHolder(val itemBinding: MealItemBinding) : RecyclerView.ViewHolder(itemBinding.root)
 
     // The "CategoryDiffCallback" class extends the
     // "DiffUtil.ItemCallback" class and provides custom implementations

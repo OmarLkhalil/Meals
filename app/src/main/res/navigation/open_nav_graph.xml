@@ -9,7 +9,6 @@
         android:id="@+id/splashFragment"
         android:name="com.example.restaurantapp.ui.auth.splash.SplashFragment"
         >
-
         <action
             android:id="@+id/action_Splash_to_RegisterFragment"
             app:destination="@+id/registerFragment"
@@ -23,9 +22,7 @@
             app:destination="@+id/mainFragment"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             >
-
         </action>
-
     </fragment>
 
     <fragment

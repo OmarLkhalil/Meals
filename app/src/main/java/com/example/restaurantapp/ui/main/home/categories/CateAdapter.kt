@@ -1,16 +1,22 @@
 package com.example.restaurantapp.ui.main.home.categories
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.restaurantapp.databinding.CateItemBinding
+import com.example.restaurantapp.ui.main.home.HomeFragmentDirections
 import com.restaurantapp.domain.entity.CategoriesItem
 
 
-class CateAdapter : ListAdapter<CategoriesItem, CateAdapter.ViewHolder>(CategoryDiffCallback()) {
+class CateAdapter(private val context: Context): ListAdapter<CategoriesItem, CateAdapter.ViewHolder>(CategoryDiffCallback()) {
+
+    private lateinit var navController: NavController
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemBinding = CateItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -18,26 +24,26 @@ class CateAdapter : ListAdapter<CategoriesItem, CateAdapter.ViewHolder>(Category
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
-        val item = getItem(position)
-        holder.itemView.setOnClickListener {
-            onItemClickListener?.onItemClickListener(position, item)
+        val meal = getItem(position)
+        holder.itemBinding.txvCateMealname.text = meal.strCategory
+        holder.itemBinding.categoryDesTv.text   = meal.strCategoryDescription
+        Glide.with(context).load(meal.strCategoryThumb).into(holder.itemBinding.imvCatemeal)
+
+        holder.itemView.setOnClickListener{
+            navController = Navigation.findNavController(it)
+            val action = meal.idCategory?.let { it1 ->
+                HomeFragmentDirections.actionMainToCateDetails(
+                    mealId = it1
+                )
+            }
+            if (action != null) {
+                navController.navigate(action)
+            }
         }
     }
 
 
-    var onItemClickListener: OnItemClickListener? = null
-    interface OnItemClickListener{
-        fun onItemClickListener(position: Int, item: CategoriesItem)
-    }
-
-    class ViewHolder(private val itemBinding: CateItemBinding) : RecyclerView.ViewHolder(itemBinding.root) {
-        fun bind(category: CategoriesItem) {
-            itemBinding.txvCateMealname.text = category.strCategory
-            itemBinding.categoryDesTv.text = category.strCategoryDescription
-            Glide.with(itemBinding.root.context).load(category.strCategoryThumb).into(itemBinding.imvCatemeal)
-        }
-    }
+    class ViewHolder(val itemBinding: CateItemBinding) : RecyclerView.ViewHolder(itemBinding.root)
 
     // The "CategoryDiffCallback" class extends the
     // "DiffUtil.ItemCallback" class and provides custom implementations

@@ -20,7 +20,12 @@ class LoginViewModel: BaseViewModel() {
 
     lateinit var binding: FragmentLoginBinding
 
-    val email = ObservableField<String>()
+    val email = object : ObservableField<String>(){
+        override fun set(value: String?) {
+                super.set(value?.trim())
+            }
+    }
+
     val emailError = ObservableField<String>()
     val password = ObservableField<String>()
     val passwordError = ObservableField<String>()
@@ -45,12 +50,12 @@ class LoginViewModel: BaseViewModel() {
                     //show success message
                     //messageLiveData.value = "success Login"
                     navController.navigate(R.id.action_login_to_home)
-                    checkUserFromFirestore(task.result.user?.uid)
+                    checkUserFromFireStore(task.result.user?.uid)
                 }
             }
     }
 
-    private fun checkUserFromFirestore(uid: String?) {
+    private fun checkUserFromFireStore(uid: String?) {
         showLoading.value = true
         signIn(uid!!, OnSuccessListener { docSnapshot ->
             showLoading.value = false

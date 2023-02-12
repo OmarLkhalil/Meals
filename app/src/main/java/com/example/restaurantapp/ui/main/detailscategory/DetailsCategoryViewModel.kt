@@ -1,6 +1,11 @@
 package com.example.restaurantapp.ui.main.detailscategory
 
-import com.example.data.base.BaseViewModel
+import androidx.lifecycle.ViewModel
+import com.example.domain.repo.CateDetailsRepo
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class DetailsCategoryViewModel: BaseViewModel() {
+@HiltViewModel
+class DetailsCategoryViewModel @Inject constructor(private val detailsRepo: CateDetailsRepo): ViewModel() {
+     fun getCateDetails(cateId:String) = detailsRepo.getCateDetails(cateId)
 }

@@ -84,6 +84,15 @@
             app:destination="@id/detailsMealsFragment"
             app:popUpToInclusive="true"/>
 
+
+        <action
+            android:id="@+id/action_main_to_cate_details"
+            app:destination="@+id/detailsCategoriesFragment"
+            app:popUpToInclusive="true"
+            >
+
+        </action>
+
     </fragment>
 
     <fragment
@@ -102,6 +111,19 @@
         android:id="@+id/detailsMealsFragment"
         android:name="com.example.restaurantapp.ui.main.detailsmeal.DetailsMealsFragment"
         tools:layout="@layout/fragment_meals_details"
+        >
+        <argument
+            android:name="mealId"
+            app:argType="string"
+            android:defaultValue="1"
+            />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/detailsCategoriesFragment"
+        android:name="com.example.restaurantapp.ui.main.detailscategory.DetailsCategoryFragment"
+        tools:layout="@layout/fragment_category_details"
         >
         <argument
             android:name="mealId"

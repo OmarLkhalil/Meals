@@ -1,14 +1,8 @@
 package com.example.restaurantapp.dependecyInjection
 
 import com.example.data.remote.ApiService
-import com.example.data.repo.CategoriesRepImp
-import com.example.data.repo.DetailsRepImpl
-import com.example.data.repo.MealsRepImp
-import com.example.data.repo.SearchMealsImp
-import com.example.domain.repo.CateRepo
-import com.example.domain.repo.DetailsRepo
-import com.example.domain.repo.MealRepo
-import com.example.domain.repo.SearchRepo
+import com.example.data.repo.*
+import com.example.domain.repo.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,7 +14,6 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 object RepoModule {
-
     @Provides
     fun provideRepo(apiService: ApiService): CateRepo {
         return CategoriesRepImp(apiService)
@@ -37,7 +30,12 @@ object RepoModule {
     }
 
     @Provides
-    fun provideDetailsRepo(apiService: ApiService): DetailsRepo{
-        return DetailsRepImpl(apiService)
+    fun provideDetailsRepo(apiService: ApiService): MealDetailsRepo{
+        return MealDetailsRepImpl(apiService)
+    }
+
+    @Provides
+    fun provideCateDetailsRepo(apiService: ApiService): CateDetailsRepo{
+        return CategoriesDetailsImpl(apiService)
     }
 }
