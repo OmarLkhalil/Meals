@@ -20,7 +20,7 @@ interface ApiService {
    @GET("lookup.php")
    suspend fun getMealDetails(@Query("i") mealId:String) : Response<Meals>
 
-   @GET("categories.php")
-   suspend fun getCateDetails(@Query("3141231231231231231231231231231231231231231") mealId:String) : Response<Category>
+   @GET("filter.php")
+   suspend fun getMealsByCategory(@Query("c") categoryName: String): Response<Meals>
 
 }

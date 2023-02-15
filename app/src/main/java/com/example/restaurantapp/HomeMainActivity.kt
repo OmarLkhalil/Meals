@@ -18,7 +18,6 @@ class HomeMainActivity : AppCompatActivity() {
 
     lateinit var drawerLayout    : DrawerLayout
     private lateinit var navView : NavigationView
-
     lateinit var toolBar        : Toolbar
     lateinit var  navController : NavController
 

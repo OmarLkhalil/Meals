@@ -35,7 +35,7 @@ object RepoModule {
     }
 
     @Provides
-    fun provideCateDetailsRepo(apiService: ApiService): CateDetailsRepo{
-        return CategoriesDetailsImpl(apiService)
+    fun provideCateDetailsRepo(apiService: ApiService): FilterByCateRepo{
+        return CategoriesImplFilterBy(apiService)
     }
 }

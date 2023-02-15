@@ -30,7 +30,7 @@ object UseCaseModule {
         return DetailsUseCase(detailRepo)
     }
     @Provides
-    fun getCateDetailUseCase(detailRepo: CateDetailsRepo): CateDetailsUseCase{
+    fun getCateDetailUseCase(detailRepo: FilterByCateRepo): CateDetailsUseCase{
         return CateDetailsUseCase(detailRepo)
     }
 }

@@ -11,10 +11,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
 import com.example.domain.util.Status
 import com.example.restaurantapp.databinding.FragmentCategoryDetailsBinding
+import com.example.restaurantapp.ui.main.home.meals.MealAdapter
 import com.restaurantapp.domain.entity.CategoriesItem
+import com.restaurantapp.domain.entity.Category
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
@@ -24,10 +25,12 @@ import kotlinx.coroutines.withContext
 
 class DetailsCategoryFragment : Fragment() {
 
+    lateinit var category: CategoriesItem
     private lateinit var navController: NavController
     private lateinit var binding: FragmentCategoryDetailsBinding
     private val args: DetailsCategoryFragmentArgs by navArgs()
     private val mealsViewModel by activityViewModels<DetailsCategoryViewModel>()
+    private lateinit var mealsAdapter : MealAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,36 +44,34 @@ class DetailsCategoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
+        category = args.category!!
+        mealsAdapter = MealAdapter(requireContext())
+        mealsAdapter.navigate(category)
         lifecycleScope.launch {
-            loadMealsDetails(args.mealId)
+            category.strCategory?.let { loadMealsDetails(it) }
         }
     }
 
     private suspend fun loadMealsDetails(cateId: String) = withContext(Dispatchers.IO) {
+
         mealsViewModel.getCateDetails(cateId)
             .onEach { result ->
                 when (result.status) {
                     Status.SUCCESS -> {
-                        val cate = result.data?.get(0)
-                        if (cate != null) {
-                            initDetails(cate)
+                        val mealsList=result.data
+                        mealsAdapter.submitList(mealsList)
                         }
-                    }
-                    else -> {
-                    }
+                    else -> {}
                 }
-            }.catch { exception ->
+
+            }
+
+            .catch { exception ->
                 Log.e("Details Cate Fragment", "Error loading cate details", exception)
             }
             .launchIn(lifecycleScope)
-    }
 
-    private fun initDetails(cate: CategoriesItem) {
+        binding.mealsContainerId.adapter = mealsAdapter
 
-        if (cate.strCategory != null) {
-            Glide.with(this).load(cate.strCategoryThumb).into(binding.imvHeader)
-        }
-        binding.mealName.text = cate.strCategory
-        binding.instructions.text = cate.strCategoryDescription
     }
 }

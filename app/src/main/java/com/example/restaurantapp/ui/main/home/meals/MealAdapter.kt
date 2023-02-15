@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.example.domain.entity.MealsItem
 import com.example.restaurantapp.databinding.MealItemBinding
 import com.example.restaurantapp.ui.main.home.HomeFragmentDirections
+import com.restaurantapp.domain.entity.CategoriesItem
 
 
 class MealAdapter(private val context: Context) : ListAdapter<MealsItem, MealAdapter.ViewHolder>(
@@ -19,6 +20,7 @@ class MealAdapter(private val context: Context) : ListAdapter<MealsItem, MealAda
 ) {
 
     private lateinit var navController: NavController
+    private lateinit var category: CategoriesItem
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemBinding = MealItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -45,6 +47,12 @@ class MealAdapter(private val context: Context) : ListAdapter<MealsItem, MealAda
     }
 
     class ViewHolder(val itemBinding: MealItemBinding) : RecyclerView.ViewHolder(itemBinding.root)
+
+
+    fun navigate(category: CategoriesItem){
+        this.category =category
+    }
+
 
     // The "CategoryDiffCallback" class extends the
     // "DiffUtil.ItemCallback" class and provides custom implementations

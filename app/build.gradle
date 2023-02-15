@@ -47,10 +47,9 @@ android {
 
 dependencies {
 
-    def fragment_version = "1.5.5"
-    def nav_version = "2.4.1"
+    def nav_version = "2.5.3"
 
-    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:'
@@ -72,8 +71,8 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
     implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
-    implementation "androidx.fragment:fragment-ktx:$fragment_version"
 
+    implementation "androidx.fragment:fragment-ktx:1.5.5"
 
     implementation "com.google.dagger:hilt-android:2.44.2"
     kapt "com.google.dagger:hilt-android-compiler:2.44.2"

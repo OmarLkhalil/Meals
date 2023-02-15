@@ -2,6 +2,7 @@ package com.example.restaurantapp.ui.main.home.categories
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -29,19 +30,16 @@ class CateAdapter(private val context: Context): ListAdapter<CategoriesItem, Cat
         holder.itemBinding.categoryDesTv.text   = meal.strCategoryDescription
         Glide.with(context).load(meal.strCategoryThumb).into(holder.itemBinding.imvCatemeal)
 
-        holder.itemView.setOnClickListener{
-            navController = Navigation.findNavController(it)
-            val action = meal.idCategory?.let { it1 ->
-                HomeFragmentDirections.actionMainToCateDetails(
-                    mealId = it1
-                )
-            }
-            if (action != null) {
-                navController.navigate(action)
-            }
+        holder.itemView.setOnClickListener {
+            initCategoryFragment(it, meal)
         }
     }
 
+    private fun initCategoryFragment(view: View, category: CategoriesItem) {
+        navController = Navigation.findNavController(view)
+        val action = HomeFragmentDirections.actionMainToCateDetails(category,null)
+        navController.navigate(action)
+    }
 
     class ViewHolder(val itemBinding: CateItemBinding) : RecyclerView.ViewHolder(itemBinding.root)
 
@@ -64,6 +62,5 @@ class CateAdapter(private val context: Context): ListAdapter<CategoriesItem, Cat
         ): Boolean {
             return oldItem == newItem
         }
-
     }
 }
