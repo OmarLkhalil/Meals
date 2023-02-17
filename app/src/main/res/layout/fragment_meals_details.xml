@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imv_header"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/favorite"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/favorite_unchecked"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:adjustViewBounds="true"
+                    app:layout_constraintTop_toTopOf="@id/imv_header"
+                    app:layout_constraintEnd_toEndOf="@id/imv_header"
+                    app:layout_constraintBottom_toBottomOf="@id/imv_header"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/meal_cate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    tools:text="Side"
+                    android:textColor="@color/purple_700"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/half_margin"
+                    app:layout_constraintTop_toBottomOf="@id/imv_header"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/meal_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="35sp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    tools:text="Burek"
+                    android:layout_marginStart="@dimen/half_margin"
+                    app:layout_constraintTop_toBottomOf="@id/meal_cate"
+                    />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/ins_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/half_margin"
+                    android:backgroundTint="@color/black"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintTop_toBottomOf="@id/meal_name"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="top|right"
+                        android:padding="8dp"
+                        android:layout_marginBottom="@dimen/half_margin"
+                        >
+                        <androidx.appcompat.widget.AppCompatImageButton
+                            android:id="@+id/youtube"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/youtube"
+                            android:textSize="16sp"
+                            android:gravity="center"
+                            android:adjustViewBounds="true"
+                            />
+                        <androidx.appcompat.widget.AppCompatImageButton
+                            android:id="@+id/source"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/source"
+                            android:textSize="16sp"
+                            android:gravity="center"
+                            android:adjustViewBounds="true"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        >
+                        <TextView
+                            android:id="@+id/ins_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginBottom="5dp"
+                            android:drawablePadding="10dp"
+                            android:gravity="center_vertical"
+                            android:text="Instructions"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            />
+
+                    <TextView
+                        android:id="@+id/instructions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="14dp"
+                        android:paddingTop="15dp"
+                        android:paddingRight="14dp"
+                        android:paddingBottom="15dp"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:layout_marginTop="@dimen/full_margin"
+                        />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/ingredients_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/half_margin"
+                    android:backgroundTint="@color/black"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintTop_toBottomOf="@+id/ins_container"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="14dp"
+                            android:paddingLeft="14dp"
+                            android:paddingRight="14dp"
+                            android:text="Ingredients"
+                            android:textColor="@color/white" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:id="@+id/first_column"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/ingredient"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="14dp"
+                                    android:paddingRight="14dp"
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/second_column"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/measure"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="14dp"
+                                    android:paddingRight="14dp"
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+</layout>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_cart_view"
+    android:elevation="3dp"
+    app:cardCornerRadius="10dp"
+    app:cardBackgroundColor="@color/black"
+    android:layout_width="150dp"
+    android:layout_height="190dp"
+    android:layout_margin="@dimen/half_margin"
+    android:layout_gravity="center_horizontal"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imv_catemeal"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/txv_Mealname"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txv_Mealname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/purple_700"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imv_catemeal"
+            android:gravity="center_horizontal"
+            tools:text="Meal Name"
+            android:maxLines="2"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
