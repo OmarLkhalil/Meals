@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- res/layout/actionbar_layout.xml -->
-<com.google.android.material.appbar.MaterialToolbar
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:id="@+id/main_toolbar"
-    android:elevation="0dp"
-    android:background="@color/transparent"
-    app:navigationIcon="@drawable/menu"
+    android:layout_height="match_parent">
 
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-</com.google.android.material.appbar.MaterialToolbar>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/appBarToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/transparent" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include layout="@layout/home_content" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

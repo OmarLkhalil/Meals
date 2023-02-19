@@ -34,8 +34,7 @@ class MealsByCateAdapter(private val context: Context) : ListAdapter<MealsItem, 
         holder.itemView.setOnClickListener{
             navController = Navigation.findNavController(it)
             val action = meal.idMeal?.let { it1 ->
-                DetailsCategoryFragmentDirections.actionCategories2FragmentToDetailsFragment(
-                    null,mealId = it1
+                DetailsCategoryFragmentDirections.actionCategories2FragmentToDetailsFragment(null ,mealId = it1
                 )
             }
             if (action != null) {

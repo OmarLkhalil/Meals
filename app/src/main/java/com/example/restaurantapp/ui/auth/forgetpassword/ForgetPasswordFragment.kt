@@ -1,4 +1,4 @@
-package com.example.restaurantapp.ui.auth.login
+package com.example.restaurantapp.ui.auth.forgetpassword
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,19 +10,19 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.restaurantapp.R
-import com.example.restaurantapp.databinding.FragmentLoginBinding
+import com.example.restaurantapp.databinding.FragmentForgetPasswordBinding
 
-class LoginFragment :Fragment() {
+class ForgetPasswordFragment : Fragment(){
 
-    private lateinit var binding   : FragmentLoginBinding
-    private val viewModel: LoginViewModel by viewModels()
+    private lateinit var binding: FragmentForgetPasswordBinding
+    private val viewModel: ForgetPasswordViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_forget_password, container, false)
         init()
         setListeners()
         return binding.root
@@ -33,22 +33,14 @@ class LoginFragment :Fragment() {
         viewModel.navController = navController
         binding.vm = viewModel
         viewModel.binding = binding
+        viewModel.context = requireContext()
     }
-
 
     private fun setListeners(){
-
-        binding.signUptxt.setOnClickListener{
-            viewModel.navigateToRegister(it)
-        }
-
-        binding.loginButton.setOnClickListener{
-            viewModel.login()
-        }
-
-        binding.forgotPasswordButton.setOnClickListener{
-            viewModel.navigateToForgetPassword(it)
+        binding.resetButton.setOnClickListener{
+            viewModel.reset()
         }
     }
+
 
 }

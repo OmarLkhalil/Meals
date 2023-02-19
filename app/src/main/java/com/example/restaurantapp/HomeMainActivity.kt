@@ -2,13 +2,15 @@ package com.example.restaurantapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_UNLOCKED
 import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,55 +18,54 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @Suppress("UNREACHABLE_CODE")
 @AndroidEntryPoint
-class HomeMainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class HomeMainActivity : AppCompatActivity() {
 
-    lateinit var drawerLayout    : DrawerLayout
-    private lateinit var navView : NavigationView
-    lateinit var toolBar        : Toolbar
-    lateinit var  navController : NavController
+    lateinit var  drawerLayout   : DrawerLayout
+    lateinit var  navController  : NavController
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
         drawerLayout = findViewById(R.id.drawer_layout)
-        navView      = findViewById(R.id.nav_view)
 
-        // setup the toolbar
-        val navHostFrag = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
-        navController   = navHostFrag.navController
+        val toolbar = findViewById<Toolbar>(R.id.appBarToolbar)
+        setSupportActionBar(toolbar)
+        toolbar.setNavigationIcon(R.drawable.menu)
 
-        toolBar  = findViewById(R.id.main_toolbar)
-        setSupportActionBar(toolBar)
-        supportActionBar?.title = ""
-
-        val appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
-        toolBar.setupWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
-
+        setUpNavDrawer()
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.mainFragment -> {
-                navController.navigate(R.id.mainFragment)
-            }
-            R.id.favoriteFragment -> {
-                navController.navigate(R.id.favoriteFragment)
-            }
-        }
+    override fun onSupportNavigateUp() =
+        findNavController(R.id.nav_host).navigateUp(appBarConfiguration)
 
-        drawerLayout.closeDrawer(GravityCompat.START)
-        return true
+
+    private fun setUpNavDrawer(){
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.mainFragment,
+                R.id.favoriteFragment,
+            ),
+            findViewById<DrawerLayout>(R.id.drawer_layout)
+        )
+        with(findNavController(R.id.nav_host)){
+            findViewById<NavigationView>(R.id.nav_view).setupWithNavController(this)
+            setupActionBarWithNavController(this, appBarConfiguration)
+            enableDrawer()
+            }
     }
-
 
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
-        if (drawerLayout.isOpen) {
-            drawerLayout.close()
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
+    }
+
+    private fun enableDrawer() {
+        supportActionBar?.show()
+        drawerLayout.setDrawerLockMode(LOCK_MODE_UNLOCKED)
     }
 }

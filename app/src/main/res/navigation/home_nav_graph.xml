@@ -67,6 +67,9 @@
             app:popUpToInclusive="true"
             >
         </action>
+        <action
+            android:id="@+id/action_loginFragment_to_forgetPasswordFragment"
+            app:destination="@id/forgetPasswordFragment" />
 
     </fragment>
 
@@ -176,6 +179,10 @@
         android:id="@+id/settingsFragment"
         android:name="com.example.restaurantapp.ui.main.setting.SettingsFragment"
         />
+    <fragment
+        android:id="@+id/forgetPasswordFragment"
+        android:name="com.example.restaurantapp.ui.auth.forgetpassword.ForgetPasswordFragment"
+        android:label="ForgetPasswordFragment" />
 
 
 </navigation>

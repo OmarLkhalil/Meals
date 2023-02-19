@@ -14,12 +14,10 @@ import androidx.navigation.fragment.navArgs
 import com.example.domain.util.Status
 import com.example.restaurantapp.databinding.FragmentCategoryDetailsBinding
 import com.restaurantapp.domain.entity.CategoriesItem
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class DetailsCategoryFragment : Fragment() {
 
@@ -51,7 +49,7 @@ class DetailsCategoryFragment : Fragment() {
         }
     }
 
-    private suspend fun loadMealsDetails(cateId: String) = withContext(Dispatchers.IO) {
+    private fun loadMealsDetails(cateId: String){
 
         mealsViewModel.getCateDetails(cateId)
             .onEach { result ->
@@ -62,11 +60,13 @@ class DetailsCategoryFragment : Fragment() {
                         }
                     else -> {}
                 }
+
             }
             .catch { exception ->
                 Log.e("Details Cate Fragment", "Error loading cate details", exception)
             }
             .launchIn(lifecycleScope)
+
         binding.mealsContainerId.adapter = mealsAdapter
     }
 }

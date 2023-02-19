@@ -87,22 +87,14 @@ class LoginViewModel: BaseViewModel() {
     }
 
 
-    fun resetPassword(email: String) {
-        showProgress()
-        auth.sendPasswordResetEmail(email)
-            .addOnCompleteListener { task ->
-                hideProgress()
-                if (task.isSuccessful) {
-                    messageLiveData.value = "Password reset email sent"
-                } else {
-                    task.exception?.localizedMessage?.let { showError(it) }
-                }
-            }
-    }
+
 
 
     fun navigateToRegister(view: View) {
         findNavController(view).navigate(R.id.actionLogin_toRegister)
+    }
+    fun navigateToForgetPassword(view: View) {
+        findNavController(view).navigate(R.id.action_loginFragment_to_forgetPasswordFragment)
     }
 
     private fun validateField(

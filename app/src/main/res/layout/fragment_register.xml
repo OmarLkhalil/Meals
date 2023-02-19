@@ -66,15 +66,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="textNoSuggestions"
                     android:maxLines="1" />
-
             </com.google.android.material.textfield.TextInputLayout>
-
-            <View
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/line">
-
-            </View>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/emailAddressLayout"
@@ -105,13 +97,6 @@
                     android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
-            <View
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/line">
-
-            </View>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/passwordLayout"
@@ -146,26 +131,20 @@
                     android:lines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <View
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/line">
-
-            </View>
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+
+                >
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/SignUp_Button"
                     android:layout_width="315dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:text="Sign Up"
                     android:textColor="?attr/colorOnPrimarySurface"
                     app:cornerRadius="10dp"
-                    android:onClick="@{()->vm.createAccount()}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -176,7 +155,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_gravity="center"
-                    android:layout_margin="8dp"
+                    android:layout_margin="@dimen/half_margin"
                     android:indeterminate="true"
                     android:indeterminateTint="@color/teal_200"
                     android:visibility="invisible"
@@ -184,25 +163,17 @@
                     app:layout_constraintEnd_toEndOf="@id/SignUp_Button"
                     app:layout_constraintStart_toStartOf="@id/SignUp_Button"
                     app:layout_constraintTop_toTopOf="@id/SignUp_Button"
-                    tools:visibility="visible" />
+                    tools:visibility="visible"
+                    />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/Sign_in_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/full_margin"
-                    android:layout_marginEnd="@dimen/full_margin"
-                    android:layout_marginBottom="@dimen/full_margin"
-                    android:text="Sign In"
-                    android:textSize="16sp"
-                    style="@style/Widget.Material3.Button.TextButton"
-                    android:textColor="@color/purple_500"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.139"
-                    app:layout_constraintStart_toEndOf="@id/already_have_acc"
-                    app:layout_constraintTop_toBottomOf="@id/SignUp_Button"
-                    app:layout_constraintVertical_bias="0.0" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                >
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/already_have_acc"
@@ -210,25 +181,60 @@
                     android:layout_height="wrap_content"
                     android:text="Already have an Account?"
                     android:textColor="@color/white"
-                    android:layout_marginStart="@dimen/max_margin"
-                    android:layout_marginTop="@dimen/full_margin"
-                    android:layout_marginBottom="@dimen/full_margin"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/SignUp_Button"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/double_max_margin"
                     />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/Sign_in_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sign In"
+                    android:textSize="16sp"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:textColor="@color/purple_500"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="@dimen/half_margin"
+                    />
 
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/sign_with_google"
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                style="@style/Widget.Material3.Button.TextButton"
-                android:textColor="@color/white"
-                android:text="Sign in With Google"
-                android:textSize="20sp"
-                />
+                app:cardCornerRadius="20dp"
+                app:cardElevation="30dp"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/half_margin"
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/SigninGoogle">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/black"
+                    android:padding="10dp">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="start"
+                        android:src="@drawable/google_button"
+                        android:layout_marginEnd="5dp"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Sign in with Google"
+                        android:textAlignment="center"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/white"/>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/continue_as_guest"
@@ -236,8 +242,8 @@
                 android:layout_height="wrap_content"
                 style="@style/Widget.Material3.Button.TextButton"
                 android:textColor="@color/purple_700"
-                android:text="Continue As Guest"
-                android:layout_marginTop="@dimen/double_margin"
+                android:text="@string/continue_as_guest"
+                android:layout_marginTop="@dimen/full_margin"
                 android:textSize="20sp"
                 />
         </LinearLayout>

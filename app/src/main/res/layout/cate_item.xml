@@ -12,7 +12,7 @@
     android:layout_marginTop="3dp"
     android:layout_marginBottom="3dp"
     android:layout_width="200dp"
-    android:layout_height="300dp">
+    android:layout_height="240dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -45,8 +45,8 @@
             android:id="@+id/category_des_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:maxLines="6"
+            android:layout_margin="@dimen/half_margin"
+            android:maxLines="3"
             android:gravity="center_horizontal"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"

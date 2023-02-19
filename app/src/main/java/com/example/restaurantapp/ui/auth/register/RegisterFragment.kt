@@ -93,7 +93,7 @@ class RegisterFragment : Fragment(){
         val mGoogleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
 
-        binding.signWithGoogle.setOnClickListener {
+        binding.SigninGoogle.setOnClickListener {
             val signInIntent = googleSignInClient.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
