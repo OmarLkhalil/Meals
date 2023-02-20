@@ -1,4 +1,6 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
 
     <group
         android:id="@+id/navigation_menu"
@@ -18,11 +20,6 @@
         android:id="@+id/settings"
         android:icon="@drawable/settings"
         android:title="Settings" />
-
-    <item
-        android:id="@+id/sign_out"
-        android:icon="@drawable/sign_out"
-        android:title="Sign Up" />
 
     </group>
 

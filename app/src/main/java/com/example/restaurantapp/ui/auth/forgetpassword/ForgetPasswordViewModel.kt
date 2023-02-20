@@ -56,6 +56,7 @@ class ForgetPasswordViewModel : BaseViewModel(){
                 }
             }
     }
+
     private fun validateField(
         field: ObservableField<String>,
         errorField: ObservableField<String>,

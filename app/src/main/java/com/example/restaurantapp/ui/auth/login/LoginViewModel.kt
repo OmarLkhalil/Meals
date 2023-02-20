@@ -63,7 +63,7 @@ class LoginViewModel: BaseViewModel() {
                 } else {
                     //show success message
                     //messageLiveData.value = "success Login"
-                    navController.navigate(R.id.action_login_to_home)
+                    navController.navigate(R.id.action_loginFragment_to_mainFragment2)
                     checkUserFromFireStore(task.result.user?.uid)
                 }
             }

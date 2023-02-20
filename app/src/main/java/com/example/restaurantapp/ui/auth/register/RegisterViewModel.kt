@@ -51,7 +51,7 @@ class RegisterViewModel : BaseViewModel() {
                 } else {
                     //show success message
                     //messageLiveData.value = "success registration"
-                    navController.navigate(R.id.actionRegister_toHome)
+                    navController.navigate(R.id.action_registerFragment_to_mainFragment)
                     createFireStoreUser(task.result.user?.uid)
                 }
             }
@@ -122,7 +122,7 @@ class RegisterViewModel : BaseViewModel() {
     }
 
     fun continueAsGuest(){
-        navController.navigate(R.id.actionRegister_toHome)
+        navController.navigate(R.id.action_registerFragment_to_mainFragment)
     }
 
 

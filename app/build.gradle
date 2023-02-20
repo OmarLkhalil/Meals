@@ -88,5 +88,9 @@ dependencies {
 
     implementation project(path: ':domain')
     implementation project(path: ':data')
+    
+    def lottieVersion = "3.4.0"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
 
 }

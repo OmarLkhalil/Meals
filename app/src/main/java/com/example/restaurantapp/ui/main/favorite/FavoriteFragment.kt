@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.restaurantapp.R
 import com.example.restaurantapp.databinding.FragmentFavoriteBinding
 
 class FavoriteFragment: Fragment(){
@@ -25,6 +26,7 @@ class FavoriteFragment: Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val adapter = FavoriteAdapter(requireContext())
+        recyclerView = requireView().findViewById(R.id.favorite_rec)
         recyclerView.adapter = adapter
     }
 }

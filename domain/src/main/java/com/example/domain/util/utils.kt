@@ -1,5 +1,7 @@
 package com.example.domain.util
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.app.Activity
 import android.content.Context
 import android.view.View
@@ -9,11 +11,26 @@ import androidx.fragment.app.Fragment
 
 
 fun View.show() {
+    animate().cancel()
+
     visibility = View.VISIBLE
+    animate()
+        .alpha(1.0f)
+        .setListener(null)
+        .start()
 }
 
-fun View.hide() {
-    visibility = View.INVISIBLE
+fun View.hide(invisible: Boolean = false) {
+    animate().cancel()
+
+    animate()
+        .alpha(0.0f)
+        .setListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                visibility = if (invisible) View.INVISIBLE else View.GONE
+            }
+        })
+        .start()
 }
 
 inline fun <T : View> T.showIf(condition: () -> Boolean) {

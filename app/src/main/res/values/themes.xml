@@ -21,8 +21,8 @@
         <item name="titleTextColor">@color/white</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
-        <item name="android:textColor">?attr/colorOnSurface</item>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.ActionBar.Primary">
+    <item name="android:background">@android:color/transparent</item>
     </style>
 
 </resources>
