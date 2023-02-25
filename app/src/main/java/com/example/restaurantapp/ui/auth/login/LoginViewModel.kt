@@ -59,7 +59,7 @@ class LoginViewModel: BaseViewModel() {
                 hideProgress()
                 if (!task.isSuccessful) {
                     //show error message
-                    messageLiveData.value = task.exception!!.localizedMessage
+                    showError(task.exception.toString())
                 } else {
                     //show success message
                     //messageLiveData.value = "success Login"
@@ -76,19 +76,16 @@ class LoginViewModel: BaseViewModel() {
             val user = docSnapshot.toObject(AppUser::class.java)
             if (user == null) {
                 messageLiveData.value = "Valid Email or Password"
+                showError(messageLiveData.value.toString())
                 return@OnSuccessListener
             } else {
                 DataUtils.user = user
             }
         }, onFailureListener = {
             hideProgress()
-            messageLiveData.value = it.localizedMessage
+            it.localizedMessage?.let { it1 -> showError(it1) }
         })
     }
-
-
-
-
 
     fun navigateToRegister(view: View) {
         findNavController(view).navigate(R.id.actionLogin_toRegister)

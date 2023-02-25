@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "845877789209",
-    "project_id": "resturantapp-f1e5c",
-    "storage_bucket": "resturantapp-f1e5c.appspot.com"
+    "project_number": "53998571236",
+    "project_id": "meals-27af4",
+    "storage_bucket": "meals-27af4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:845877789209:android:37f3516a8ae147dedc2088",
+        "mobilesdk_app_id": "1:53998571236:android:26c6e04a902a5c894fe6f1",
         "android_client_info": {
           "package_name": "com.example.restaurantapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "845877789209-1slk7bmmi7f5rkb1puljbsth2r0pi6hg.apps.googleusercontent.com",
+          "client_id": "53998571236-plnsd54tbgomkefkgqkkdfj98ogrdf5q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.restaurantapp",
+            "certificate_hash": "05b42c69c95baf0d0dc562cf41532e6887e10253"
+          }
+        },
+        {
+          "client_id": "53998571236-1p1j82vto9uaj601q70ufjishodjmljt.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC9BebKsPPXg0cCKot9JCA4i1-27mSfQIA"
+          "current_key": "AIzaSyDOgDWVdJgeqUmZa0uWbwW8zwMW9LS4xD0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "845877789209-1slk7bmmi7f5rkb1puljbsth2r0pi6hg.apps.googleusercontent.com",
+              "client_id": "53998571236-1p1j82vto9uaj601q70ufjishodjmljt.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

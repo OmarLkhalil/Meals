@@ -1,16 +1,30 @@
 package com.example.restaurantapp.ui.main.search
 
 import android.os.Bundle
+
+
 import android.text.Editable
 import android.text.TextWatcher
+
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
+
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+
+
 import androidx.lifecycle.lifecycleScope
+
+
 import com.example.domain.util.*
+
+
 import com.example.restaurantapp.databinding.FragmentSearchBinding
+
+
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch

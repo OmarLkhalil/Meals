@@ -62,7 +62,8 @@ class RegisterViewModel : BaseViewModel() {
         val user = AppUser(
             id = uid,
             name = name.get(),
-            email = email.get()
+            email = email.get(),
+            favoriteMealId = null
         )
         addUserToFireStore(user, {
             hideProgress()
@@ -101,6 +102,7 @@ class RegisterViewModel : BaseViewModel() {
 
     private fun showError(errorMessage: String) {
         messageLiveData.value = errorMessage
+
     }
 
     fun firebaseAuthWithGoogle(idToken: String) {

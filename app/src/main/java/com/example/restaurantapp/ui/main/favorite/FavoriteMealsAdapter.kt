@@ -1,7 +1,6 @@
-package com.example.restaurantapp.ui.main.home.meals
+package com.example.restaurantapp.ui.main.favorite
 
 import android.content.Context
-
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -18,40 +17,32 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.bumptech.glide.Glide
 
+import com.example.domain.entity.FavoriteMeal
 
-import com.example.domain.entity.MealsItem
-
-
-import com.example.restaurantapp.databinding.MealItemBinding
-import com.example.restaurantapp.ui.main.home.HomeFragmentDirections
+import com.example.restaurantapp.databinding.FavoriteItemBinding
 
 
-import com.restaurantapp.domain.entity.CategoriesItem
 
-
-class MealAdapter(private val context: Context) : ListAdapter<MealsItem, MealAdapter.ViewHolder>(
+class FavoriteMealsAdapter(private val context: Context) : ListAdapter<FavoriteMeal, FavoriteMealsAdapter.ViewHolder>(
     MealDiffCallback()
 ) {
 
     private lateinit var navController: NavController
-    private lateinit var category: CategoriesItem
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemBinding = MealItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemBinding = FavoriteItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(itemBinding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val meal = getItem(position)
-        holder.itemBinding.txvMealname.text = meal.strMeal
-        Glide.with(context).load(meal.strMealThumb).into(holder.itemBinding.imvCatemeal)
+        holder.itemBinding.favName.text = meal.strMeal
+        Glide.with(context).load(meal.strMealThumb).into(holder.itemBinding.favImv)
 
         holder.itemView.setOnClickListener{
             navController = Navigation.findNavController(it)
             val action = meal.idMeal?.let { it1 ->
-                HomeFragmentDirections.actionMainFragmentToDetailsFragment(
-                    meal, mealId = it1
-                )
+               FavoriteMealsFragmentDirections.actionFavoriteFragmentToDetailsMealsFragment(null, it1)
             }
             if (action != null) {
                 navController.navigate(action)
@@ -59,12 +50,7 @@ class MealAdapter(private val context: Context) : ListAdapter<MealsItem, MealAda
         }
     }
 
-    class ViewHolder(val itemBinding: MealItemBinding) : RecyclerView.ViewHolder(itemBinding.root)
-
-
-    fun navigate(category: CategoriesItem){
-        this.category =category
-    }
+    class ViewHolder(val itemBinding: FavoriteItemBinding) : RecyclerView.ViewHolder(itemBinding.root)
 
 
     // The "CategoryDiffCallback" class extends the
@@ -72,20 +58,19 @@ class MealAdapter(private val context: Context) : ListAdapter<MealsItem, MealAda
     // of the "areItemsTheSame" and "areContentsTheSame" methods.
     // These methods are used by the "ListAdapter" class to determine whether an item has changed
     // between the old and new data sets, and to update the RecyclerView efficiently.
-    class MealDiffCallback : DiffUtil.ItemCallback<MealsItem>() {
+    class MealDiffCallback : DiffUtil.ItemCallback<FavoriteMeal>() {
         override fun areItemsTheSame(
-            oldItem: MealsItem,
-            newItem: MealsItem
+            oldItem: FavoriteMeal,
+            newItem: FavoriteMeal
         ): Boolean {
             return oldItem.idMeal == newItem.idMeal
         }
 
         override fun areContentsTheSame(
-            oldItem: MealsItem,
-            newItem: MealsItem
+            oldItem: FavoriteMeal,
+            newItem: FavoriteMeal
         ): Boolean {
             return oldItem == newItem
         }
-
     }
 }

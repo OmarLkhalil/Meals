@@ -1,20 +1,33 @@
 package com.example.restaurantapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
+
+
 import android.os.Bundle
+
+
 import android.view.View
+
+
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+
+
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
+
+
 import com.example.restaurantapp.R
+
+
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
+
+
 import dagger.hilt.android.AndroidEntryPoint
 
 @Suppress("UNREACHABLE_CODE")

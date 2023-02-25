@@ -42,7 +42,7 @@ class ForgetPasswordViewModel : BaseViewModel(){
             sendResetPassword(email.get()!!)
         }
     }
-    fun sendResetPassword(email: String) {
+    private fun sendResetPassword(email: String) {
         showProgress()
         auth.sendPasswordResetEmail(email)
             .addOnCompleteListener { task ->

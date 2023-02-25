@@ -63,9 +63,22 @@
         android:id="@+id/forgetPasswordFragment"
         android:name="com.example.restaurantapp.ui.auth.forgetpassword.ForgetPasswordFragment"
         />
+    <fragment
+        android:id="@+id/startAnimation"
+        android:name="com.example.restaurantapp.ui.auth.splash.StartAnimation"
+        android:label="StartAnimation" >
+        <action
+            android:id="@+id/action_startAnimation_to_splashFragment"
+            app:destination="@id/splashFragment" />
+        <action
+            android:id="@+id/action_startAnimation_to_navigation"
+            app:destination="@id/navigation" />
+    </fragment>
+
 
     <navigation android:id="@+id/navigation"
         app:startDestination="@id/mainFragment">
+
         <fragment
             android:id="@+id/detailsMealsFragment"
             android:name="com.example.restaurantapp.ui.main.detailsmeal.DetailsMealsFragment"
@@ -77,8 +90,10 @@
 
             <argument
                 android:name="meal"
-                app:argType="com.example.domain.entity.FavoriteMeal"
-                app:nullable="true" />
+                app:argType="com.example.domain.entity.MealsItem"
+                app:nullable="true"
+                />
+
         </fragment>
         <fragment
             android:id="@+id/settingsFragment"
@@ -133,19 +148,24 @@
             <action
                 android:id="@+id/action_mainFragment_to_detailsFragment"
                 app:destination="@id/detailsMealsFragment"
-                app:popUpToInclusive="true" />
+                app:popUpToInclusive="true">
+
+                <argument
+                    android:name="meal"
+                    app:argType="com.example.domain.entity.MealsItem"
+                    app:nullable="true"
+                    />
+            </action>
 
             <action
                 android:id="@+id/action_main_to_cate_details"
                 app:destination="@id/categories2Fragment"
                 app:popUpToInclusive="true">
 
-
                 <argument
                     android:name="mealId"
                     android:defaultValue="1"
                     app:argType="string">
-
                 </argument>
             </action>
             <action
@@ -157,9 +177,20 @@
 
 
         </fragment>
+
         <fragment
             android:id="@+id/favoriteFragment"
-            android:name="com.example.restaurantapp.ui.main.favorite.FavoriteFragment" />
+            android:name="com.example.restaurantapp.ui.main.favorite.FavoriteMealsFragment" >
+
+            <action
+                android:id="@+id/action_favoriteFragment_to_detailsMealsFragment"
+                app:destination="@id/detailsMealsFragment">
+
+            </action>
+
+        </fragment>
+
     </navigation>
+
 
 </navigation>

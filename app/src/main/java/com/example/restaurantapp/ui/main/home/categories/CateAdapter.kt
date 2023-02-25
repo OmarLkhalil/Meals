@@ -1,15 +1,25 @@
 package com.example.restaurantapp.ui.main.home.categories
 
 import android.content.Context
+
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
+
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+
+
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+
+
 import com.bumptech.glide.Glide
+
+
 import com.example.restaurantapp.databinding.CateItemBinding
 import com.example.restaurantapp.ui.main.home.HomeFragmentDirections
 import com.restaurantapp.domain.entity.CategoriesItem

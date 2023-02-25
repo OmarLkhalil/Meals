@@ -1,6 +1,5 @@
 package com.example.restaurantapp.dependecyInjection
 
-import com.example.domain.dao.FavoriteMealDao
 import com.example.domain.repo.*
 import com.example.domain.usecase.*
 import dagger.Module
@@ -39,9 +38,9 @@ object UseCaseModule {
     fun getCateDetailUseCase(detailRepo: FilterByCateRepo): CateDetailsUseCase{
         return CateDetailsUseCase(detailRepo)
     }
-
-    @Provides
-    fun getFavoritesUseCase(favoritesDao: FavoriteMealDao): FavoriteUseCase {
-        return FavoriteUseCase(favoritesDao)
-    }
+//
+//    @Provides
+//    fun getFavoritesUseCase(favoritesDao: FavoriteMealDao): FavoriteUseCase {
+//        return FavoriteUseCase(favoritesDao)
+//    }
 }

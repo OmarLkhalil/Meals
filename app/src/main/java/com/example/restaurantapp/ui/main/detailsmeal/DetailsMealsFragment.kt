@@ -4,24 +4,39 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+
+
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+
+
 import androidx.lifecycle.lifecycleScope
+
+
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+
 import com.bumptech.glide.Glide
 import com.example.domain.entity.FavoriteMeal
+
+
 import com.example.domain.entity.MealsItem
 import com.example.domain.util.Status
 import com.example.domain.util.hideKeyboard
+
+
 import com.example.restaurantapp.R
 import com.example.restaurantapp.databinding.FragmentMealsDetailsBinding
-import com.example.restaurantapp.ui.main.favorite.FavoriteViewModel
+import com.example.restaurantapp.ui.main.favorite.FavoriteMealsViewModel
+
+
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
@@ -31,11 +46,13 @@ import kotlinx.coroutines.withContext
 
 class DetailsMealsFragment : Fragment() {
 
+
     private lateinit var navController: NavController
     private lateinit var binding: FragmentMealsDetailsBinding
     private val args: DetailsMealsFragmentArgs by navArgs()
     private val mealsViewModel by activityViewModels<DetailsMealViewModel>()
-    private val favoriteMeals by activityViewModels<FavoriteViewModel>()
+    private val favoriteMealViewModel by activityViewModels<FavoriteMealsViewModel>()
+    private var isFavorite = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,11 +68,15 @@ class DetailsMealsFragment : Fragment() {
 
         hideKeyboard()
         navController = Navigation.findNavController(view)
-        lifecycleScope.launch {
-            loadMealsDetails(args.mealId)
-            getFavorites()
-            setupFavoriteButton()
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            loadMealsDetails(args.mealId)
+        }
+
+        binding.favorite.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launch {
+                onFavoriteButtonClick()
+            }
         }
     }
 
@@ -81,7 +102,6 @@ class DetailsMealsFragment : Fragment() {
     }
 
     private fun initDetails(meal: MealsItem) {
-
         if (meal.strMealThumb != null) {
             Glide.with(this).load(meal.strMealThumb).into(binding.imvHeader)
         }
@@ -136,66 +156,59 @@ class DetailsMealsFragment : Fragment() {
         activity?.startActivity(implicitIntent)
     }
 
-    private val favoriteChecked   = R.drawable.favorite
+    private val favoriteChecked = R.drawable.favorite
     private val favoriteUnChecked = R.drawable.favorite_unchecked
-    private var isFavorite: Boolean = false
+    private fun addFilledFavoriteImage(){
+        binding.favorite.setBackgroundResource(favoriteChecked)
+    }
+    private fun addOutlinedFavoriteImage(){
+        binding.favorite.setBackgroundResource(favoriteUnChecked)
+    }
 
 
-    private fun setupFavoriteButton() {
-        binding.favorite.setOnClickListener {
-            lifecycleScope.launch {
-                isFavorite = if (!isFavorite) {
-                    binding.favorite.setBackgroundResource(favoriteChecked)
-                    args.meal?.isFavored = true
-                    args.meal?.let { meal ->
-                        favoriteMeals.addMealToFavorite(meal).collect {
-                            when (it.status) {
-                                Status.LOADING -> {}
-                                Status.SUCCESS -> {
-                                    Log.d("FAVORITE", "Added to Favorites")
-                                    Toast.makeText(context, "Added to Favorites", Toast.LENGTH_LONG).show()
-                                }
-                                Status.FAIL -> {
-                                    Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
-                                }
-                            }
-                        }
-                    }
-                    true
+    private suspend fun onFavoriteButtonClick() {
+
+
+        val favoriteMeal = FavoriteMeal(
+            idMeal = args.meal!!.idMeal,
+            strMeal = args.meal!!.strMeal,
+            strMealThumb = args.meal!!.strMealThumb,
+            isFavored = isFavorite,
+        )
+
+        mealsViewModel.toggleFavoriteMeal(favoriteMeal,
+            {
+                // handle successful favorite meal toggle
+                if (isFavorite) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Meal added to favorites",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else {
-                    binding.favorite.setBackgroundResource(favoriteUnChecked)
-                    args.meal?.idMeal?.let { id ->
-                        favoriteMeals.removeMealFromFavorite(id)
-                    }
-                    false
-                } } } }
-    private lateinit var favoriteList: MutableList<String>
-    private lateinit var favorites: List<FavoriteMeal>
-
-    private suspend fun getFavorites() {
-        favoriteList = mutableListOf()
-        favorites = listOf()
-        favoriteMeals.getAllFavorites().collect {
-            when (it.status) {
-                Status.LOADING -> {}
-                Status.SUCCESS -> {
-                    favorites = it.data!!
-                    for (meal: FavoriteMeal in favorites) {
-                        meal.idMeal?.let { id ->
-                            favoriteList.add(id)
-                            Log.d("Favorite", "Add meal result: ${it.status}")
-                        }
-                    }
-                    isFavorite = if (favoriteList.contains(args.meal?.idMeal)) {
-                        binding.favorite.setBackgroundResource(favoriteChecked)
-                        true
-                    } else {
-                        binding.favorite.setBackgroundResource(favoriteUnChecked)
-                        false
-                    }
+                    Toast.makeText(requireContext(), "Meal removed to favorites", Toast.LENGTH_SHORT)
+                        .show()
                 }
-                Status.FAIL -> {}
+            },
+            {
+                // handle failed favorite meal toggle
+                Toast.makeText(
+                    requireContext(),
+                    "Failed to toggle favorite meal",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
+        )
+        isFavorite = !isFavorite
+        updateFavoriteIcon()
+    }
+
+
+    private fun updateFavoriteIcon() {
+        if (isFavorite) {
+            addFilledFavoriteImage()
+        } else {
+            addOutlinedFavoriteImage()
         }
     }
 }

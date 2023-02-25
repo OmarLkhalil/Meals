@@ -1,6 +1,7 @@
 package com.example.domain.util
 
 import com.example.domain.entity.AppUser
+import com.example.domain.entity.FavoriteMeal
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.firestore.CollectionReference
@@ -20,6 +21,18 @@ fun addUserToFireStore(user: AppUser,
     val userCollection = getCollection(AppUser.COLLECTION_NAME)
     val userDoc = userCollection.document(user.id!!)
     userDoc.set(user)
+        .addOnSuccessListener(onSuccessListener)
+        .addOnFailureListener(onFailureListener)
+}
+
+fun addFavoriteMeal(favoriteMeal: FavoriteMeal, userId: String,
+                    onSuccessListener: OnSuccessListener<Void>,
+                    onFailureListener: OnFailureListener) {
+    val userCollection = getCollection("users")
+    val favoriteMealsCollection = userCollection.document(userId)
+        .collection("favoriteMeals")
+    val favoriteMealDoc = favoriteMealsCollection.document(favoriteMeal.idMeal!!)
+    favoriteMealDoc.set(favoriteMeal)
         .addOnSuccessListener(onSuccessListener)
         .addOnFailureListener(onFailureListener)
 }

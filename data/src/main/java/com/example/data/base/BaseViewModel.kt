@@ -5,5 +5,5 @@ import androidx.lifecycle.ViewModel
 
 open class BaseViewModel: ViewModel() {
     val messageLiveData = MutableLiveData<String>()
-    val showLoading = MutableLiveData<Boolean>()
+    val showLoading     = MutableLiveData<Boolean>()
 }

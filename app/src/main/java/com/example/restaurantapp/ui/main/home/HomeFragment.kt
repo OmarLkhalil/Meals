@@ -1,21 +1,41 @@
 package com.example.restaurantapp.ui.main.home
 
 import android.os.Bundle
+
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
+
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+
+
 import androidx.lifecycle.lifecycleScope
+
+
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+
+
 import androidx.recyclerview.widget.RecyclerView
+
+
 import com.example.restaurantapp.R
+
+
 import com.example.restaurantapp.databinding.FragmentMainBinding
+
+
 import com.example.restaurantapp.ui.main.home.categories.CateAdapter
 import com.example.restaurantapp.ui.main.home.categories.CateViewModel
+
+
 import com.example.restaurantapp.ui.main.home.meals.MealAdapter
 import com.example.restaurantapp.ui.main.home.meals.MealsViewModel
+
+
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

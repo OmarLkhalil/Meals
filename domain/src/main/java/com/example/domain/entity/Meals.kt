@@ -1,5 +1,7 @@
 package com.example.domain.entity
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 data class Meals(
@@ -168,4 +170,31 @@ data class MealsItem(
 
 	@field:SerializedName("strMeasure15")
 	val strMeasure15: String? = null
-)
+) : Parcelable {
+
+	constructor(parcel: Parcel) : this(
+		parcel.readValue(Any::class.java.classLoader),
+		parcel.readString(),
+		parcel.readString(),
+	)
+
+	override fun writeToParcel(parcel: Parcel, flags: Int) {
+		parcel.writeValue(strImageSource)
+		parcel.writeString(strIngredient10)
+		parcel.writeString(strIngredient12)
+	}
+
+	override fun describeContents(): Int {
+		return 0
+	}
+
+	companion object CREATOR : Parcelable.Creator<MealsItem> {
+		override fun createFromParcel(parcel: Parcel): MealsItem {
+			return MealsItem(parcel)
+		}
+
+		override fun newArray(size: Int): Array<MealsItem?> {
+			return arrayOfNulls(size)
+		}
+	}
+}

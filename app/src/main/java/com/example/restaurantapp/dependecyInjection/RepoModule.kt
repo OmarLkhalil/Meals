@@ -2,7 +2,6 @@ package com.example.restaurantapp.dependecyInjection
 
 import com.example.data.remote.ApiService
 import com.example.data.repo.*
-import com.example.domain.dao.FavoriteMealDao
 import com.example.domain.repo.*
 import dagger.Module
 import dagger.Provides
@@ -40,9 +39,13 @@ object RepoModule {
         return CategoriesImplFilterBy(apiService)
     }
 
-    @Provides
-    fun provideFavoriteMealDao(dao: FavoriteMealDao): FavoriteMealsRepo {
-        return FavoriteDaoImp(dao)
-    }
+//    @Provides
+//    fun provideFavoriteMealDao(dao: FavoriteMealDao): FavoriteMealsRepo {
+//        return FavoriteDaoImp(dao)
+//    }
 
+    @Provides
+    fun provideFavoriteMealRepo(): FavoriteMealRepository{
+        return FirestoreFavoriteMealRepositoryImpl()
+    }
 }
