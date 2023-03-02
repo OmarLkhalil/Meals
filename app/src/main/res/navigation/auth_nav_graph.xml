@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation android:id="@+id/auth_nav_graph"
-    app:startDestination="@id/splashFragment"
+    app:startDestination="@id/startAnimation"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -81,8 +81,9 @@
 
         <fragment
             android:id="@+id/detailsMealsFragment"
-            android:name="com.example.restaurantapp.ui.main.detailsmeal.DetailsMealsFragment"
+            android:name="com.example.restaurantapp.ui.home.detailsmeal.DetailsMealsFragment"
             tools:layout="@layout/fragment_meals_details">
+
             <argument
                 android:name="mealId"
                 android:defaultValue="1"
@@ -97,11 +98,11 @@
         </fragment>
         <fragment
             android:id="@+id/settingsFragment"
-            android:name="com.example.restaurantapp.ui.main.setting.SettingsFragment" />
+            android:name="com.example.restaurantapp.ui.home.setting.SettingsFragment" />
 
         <fragment
             android:id="@+id/categories2Fragment"
-            android:name="com.example.restaurantapp.ui.main.detailscategory.DetailsCategoryFragment"
+            android:name="com.example.restaurantapp.ui.home.detailscategory.DetailsCategoryFragment"
             tools:layout="@layout/fragment_category_details">
 
             <argument
@@ -127,7 +128,7 @@
         </fragment>
         <fragment
             android:id="@+id/searchFragment"
-            android:name="com.example.restaurantapp.ui.main.search.SearchFragment"
+            android:name="com.example.restaurantapp.ui.home.search.SearchFragment"
             tools:layout="@layout/fragment_search">
 
             <action
@@ -138,7 +139,7 @@
         </fragment>
         <fragment
             android:id="@+id/mainFragment"
-            android:name="com.example.restaurantapp.ui.main.home.HomeFragment"
+            android:name="com.example.restaurantapp.ui.home.home.HomeFragment"
             tools:layout="@layout/fragment_main">
 
             <action
@@ -174,13 +175,16 @@
             <action
                 android:id="@+id/action_mainFragment_to_settingsFragment"
                 app:destination="@id/settingsFragment" />
+            <action
+                android:id="@+id/action_mainFragment_to_favoriteFragment"
+                app:destination="@id/favoriteFragment" />
 
 
         </fragment>
 
         <fragment
             android:id="@+id/favoriteFragment"
-            android:name="com.example.restaurantapp.ui.main.favorite.FavoriteMealsFragment" >
+            android:name="com.example.restaurantapp.ui.home.favorite.FavoriteMealsFragment" >
 
             <action
                 android:id="@+id/action_favoriteFragment_to_detailsMealsFragment"

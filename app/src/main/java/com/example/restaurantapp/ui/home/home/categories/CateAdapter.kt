@@ -1,4 +1,4 @@
-package com.example.restaurantapp.ui.main.home.categories
+package com.example.restaurantapp.ui.home.home.categories
 
 import android.content.Context
 
@@ -21,7 +21,7 @@ import com.bumptech.glide.Glide
 
 
 import com.example.restaurantapp.databinding.CateItemBinding
-import com.example.restaurantapp.ui.main.home.HomeFragmentDirections
+import com.example.restaurantapp.ui.home.home.HomeFragmentDirections
 import com.restaurantapp.domain.entity.CategoriesItem
 
 

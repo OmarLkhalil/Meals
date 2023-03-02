@@ -1,20 +1,35 @@
-package com.example.restaurantapp.ui.main.detailscategory
+package com.example.restaurantapp.ui.home.home.meals
 
 import android.content.Context
+
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
+
+
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+
+
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+
+
 import com.bumptech.glide.Glide
+
+
 import com.example.domain.entity.MealsItem
-import com.example.restaurantapp.databinding.MealByCateItemBinding
+
+
+import com.example.restaurantapp.databinding.MealItemBinding
+import com.example.restaurantapp.ui.home.home.HomeFragmentDirections
+
+
 import com.restaurantapp.domain.entity.CategoriesItem
 
 
-class MealsByCateAdapter(private val context: Context) : ListAdapter<MealsItem, MealsByCateAdapter.ViewHolder>(
+class MealAdapter(private val context: Context) : ListAdapter<MealsItem, MealAdapter.ViewHolder>(
     MealDiffCallback()
 ) {
 
@@ -22,7 +37,7 @@ class MealsByCateAdapter(private val context: Context) : ListAdapter<MealsItem, 
     private lateinit var category: CategoriesItem
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemBinding = MealByCateItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemBinding = MealItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(itemBinding)
     }
 
@@ -34,7 +49,8 @@ class MealsByCateAdapter(private val context: Context) : ListAdapter<MealsItem, 
         holder.itemView.setOnClickListener{
             navController = Navigation.findNavController(it)
             val action = meal.idMeal?.let { it1 ->
-                DetailsCategoryFragmentDirections.actionCategories2FragmentToDetailsFragment(null ,mealId = it1
+                HomeFragmentDirections.actionMainFragmentToDetailsFragment(
+                    meal, mealId = it1
                 )
             }
             if (action != null) {
@@ -43,7 +59,7 @@ class MealsByCateAdapter(private val context: Context) : ListAdapter<MealsItem, 
         }
     }
 
-    class ViewHolder(val itemBinding: MealByCateItemBinding) : RecyclerView.ViewHolder(itemBinding.root)
+    class ViewHolder(val itemBinding: MealItemBinding) : RecyclerView.ViewHolder(itemBinding.root)
 
 
     fun navigate(category: CategoriesItem){
@@ -70,5 +86,6 @@ class MealsByCateAdapter(private val context: Context) : ListAdapter<MealsItem, 
         ): Boolean {
             return oldItem == newItem
         }
+
     }
 }

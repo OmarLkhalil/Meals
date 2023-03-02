@@ -1,4 +1,4 @@
-package com.example.restaurantapp.ui.main.favorite
+package com.example.restaurantapp.ui.home.favorite
 
 import android.os.Bundle
 

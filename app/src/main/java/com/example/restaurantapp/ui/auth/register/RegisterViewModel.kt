@@ -1,24 +1,24 @@
 package com.example.restaurantapp.ui.auth.register
 
+import android.app.AlertDialog
+import android.content.Context
 import android.view.View
 import androidx.databinding.ObservableField
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
-import com.example.restaurantapp.DataUtils
 import com.example.data.base.BaseViewModel
-import com.example.domain.util.addUserToFireStore
 import com.example.domain.entity.AppUser
+import com.example.domain.usecase.SignUpUseCase
 import com.example.domain.util.hide
 import com.example.domain.util.show
 import com.example.restaurantapp.R
 import com.example.restaurantapp.databinding.FragmentRegisterBinding
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 
-class RegisterViewModel : BaseViewModel() {
+@HiltViewModel
+class RegisterViewModel @Inject constructor(private val signUpUseCase: SignUpUseCase) : BaseViewModel() {
 
     lateinit var navController: NavController
 
@@ -30,9 +30,7 @@ class RegisterViewModel : BaseViewModel() {
     val emailError = ObservableField<String>()
     val password = ObservableField<String>()
     val passwordError = ObservableField<String>()
-    private val auth = Firebase.auth
 
-    lateinit var googleSignInClient: GoogleSignInClient
 
     fun createAccount() {
         if (validate()) {
@@ -40,38 +38,37 @@ class RegisterViewModel : BaseViewModel() {
         }
     }
 
-    private fun addAccountToFireBase() {
-        showProgress()
-        auth.createUserWithEmailAndPassword(email.get()!!, password.get()!!)
-            .addOnCompleteListener { task ->
-                hideProgress()
-                if (!task.isSuccessful) {
-                    //show error message
-                    task.exception!!.localizedMessage?.let { showError(it) }
-                } else {
-                    //show success message
-                    //messageLiveData.value = "success registration"
-                    navController.navigate(R.id.action_registerFragment_to_mainFragment)
-                    createFireStoreUser(task.result.user?.uid)
-                }
-            }
+    lateinit var context : Context
+
+    private fun showError(errorMessage: String) {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Error")
+        builder.setMessage(errorMessage)
+        builder.setPositiveButton("OK") { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog = builder.create()
+        dialog.show()
     }
 
-    private fun createFireStoreUser(uid: String?) {
+    private fun addAccountToFireBase() {
         showProgress()
         val user = AppUser(
-            id = uid,
+            id = null,
             name = name.get(),
             email = email.get(),
             favoriteMealId = null
         )
-        addUserToFireStore(user, {
-            hideProgress()
-            DataUtils.user = user
-        }, {
-            hideProgress()
-            it.localizedMessage?.let { it1 -> showError(it1) }
-        })
+        signUpUseCase.execute(user,
+            onSuccess = {
+                hideProgress()
+                navController.navigate(R.id.action_registerFragment_to_mainFragment)
+            },
+            onFailure = { error ->
+                hideProgress()
+                showError(error.localizedMessage ?: "Unknown error")
+            }
+        )
     }
 
     fun navigateToLoginFragment(view: View) {
@@ -100,33 +97,10 @@ class RegisterViewModel : BaseViewModel() {
         binding.progressBar.hide()
     }
 
-    private fun showError(errorMessage: String) {
-        messageLiveData.value = errorMessage
-
-    }
-
-    fun firebaseAuthWithGoogle(idToken: String) {
-        showProgress()
-        val credential = GoogleAuthProvider.getCredential(idToken, null)
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener { task ->
-                hideProgress()
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    val user = auth.currentUser
-                    // Save user data to Firestore
-                    createFireStoreUser(user?.uid)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    task.exception?.localizedMessage?.let { showError(it) }
-                }
-            }
-    }
 
     fun continueAsGuest(){
         navController.navigate(R.id.action_registerFragment_to_mainFragment)
     }
-
 
     private fun validate(): Boolean {
         var valid = true
@@ -135,4 +109,6 @@ class RegisterViewModel : BaseViewModel() {
         valid = validateField(password, passwordError, "Enter Password") && valid
         return valid
     }
+
+
 }

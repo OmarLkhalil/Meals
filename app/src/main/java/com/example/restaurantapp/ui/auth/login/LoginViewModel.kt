@@ -1,41 +1,43 @@
 package com.example.restaurantapp.ui.auth.login
 
+import android.app.AlertDialog
+import android.content.Context
 import android.view.View
 import androidx.databinding.ObservableField
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
-import com.example.restaurantapp.DataUtils
+import com.example.domain.util.DataUtils
 import com.example.data.base.BaseViewModel
-import com.example.domain.util.signIn
 import com.example.domain.entity.AppUser
+import com.example.domain.usecase.SignInUseCase
 import com.example.domain.util.hide
 import com.example.domain.util.show
 import com.example.restaurantapp.R
 import com.example.restaurantapp.databinding.FragmentLoginBinding
-import com.google.android.gms.tasks.OnSuccessListener
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class LoginViewModel: BaseViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val signInUseCase: SignInUseCase,
+) : BaseViewModel() {
 
     lateinit var navController: NavController
     lateinit var binding: FragmentLoginBinding
 
-    val email = object : ObservableField<String>(){
+    val email = object : ObservableField<String>() {
         override fun set(value: String?) {
-                super.set(value?.trim())
-            }
+            super.set(value?.trim())
+        }
     }
 
     val emailError = ObservableField<String>()
-    val password   = ObservableField<String>()
+    val password = ObservableField<String>()
     val passwordError = ObservableField<String>()
-    val auth = Firebase.auth
-
 
     fun login() {
         if (validate()) {
-            checkAccountInFireBase()
+            checkAccountInRepo()
         }
     }
 
@@ -47,49 +49,45 @@ class LoginViewModel: BaseViewModel() {
         binding.progressBar.hide()
     }
 
+    lateinit var context: Context
+
     private fun showError(errorMessage: String) {
-        messageLiveData.value = errorMessage
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Error")
+        builder.setMessage(errorMessage)
+        builder.setPositiveButton("OK") { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog = builder.create()
+        dialog.show()
     }
 
-
-    private fun checkAccountInFireBase() {
+    private fun checkAccountInRepo() {
         showProgress()
-        auth.signInWithEmailAndPassword(email.get()!!, password.get()!!)
-            .addOnCompleteListener { task ->
+        signInUseCase.execute(
+            SignInUseCase.Params(email.get()!!, password.get()!!),
+            { docSnapshot ->
                 hideProgress()
-                if (!task.isSuccessful) {
-                    //show error message
-                    showError(task.exception.toString())
+                val user = docSnapshot.toObject(AppUser::class.java)
+                if (user == null) {
+                    messageLiveData.value = "Valid Email or Password"
+                    showError(messageLiveData.value.toString())
                 } else {
-                    //show success message
-                    //messageLiveData.value = "success Login"
+                    DataUtils.user = user
                     navController.navigate(R.id.action_loginFragment_to_mainFragment2)
-                    checkUserFromFireStore(task.result.user?.uid)
                 }
+            },
+           { error ->
+                hideProgress()
+                showError(error.localizedMessage ?: "Unknown error")
             }
-    }
-
-    private fun checkUserFromFireStore(uid: String?) {
-        showProgress()
-        signIn(uid!!, OnSuccessListener { docSnapshot ->
-            hideProgress()
-            val user = docSnapshot.toObject(AppUser::class.java)
-            if (user == null) {
-                messageLiveData.value = "Valid Email or Password"
-                showError(messageLiveData.value.toString())
-                return@OnSuccessListener
-            } else {
-                DataUtils.user = user
-            }
-        }, onFailureListener = {
-            hideProgress()
-            it.localizedMessage?.let { it1 -> showError(it1) }
-        })
+        )
     }
 
     fun navigateToRegister(view: View) {
         findNavController(view).navigate(R.id.actionLogin_toRegister)
     }
+
     fun navigateToForgetPassword(view: View) {
         findNavController(view).navigate(R.id.action_loginFragment_to_forgetPasswordFragment)
     }

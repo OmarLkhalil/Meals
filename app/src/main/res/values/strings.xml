@@ -16,4 +16,11 @@
     <string name="hello_message">Hello Omar \nHow are you today</string>
     <string name="continue_as_guest">Continue As Guest</string>
 
+
+    <!-- Login Dialog -->
+    <string name="login_dialog_title">Login Required</string>
+    <string name="login_dialog_message">You must be logged in to use this feature. Do you want to login now?</string>
+    <string name="login_dialog_login">Login</string>
+    <string name="login_dialog_cancel">Cancel</string>
+
 </resources>

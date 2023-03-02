@@ -1,4 +1,4 @@
-package com.example.restaurantapp.ui.main.home
+package com.example.restaurantapp.ui.home.home
 
 import android.os.Bundle
 
@@ -28,12 +28,12 @@ import com.example.restaurantapp.R
 import com.example.restaurantapp.databinding.FragmentMainBinding
 
 
-import com.example.restaurantapp.ui.main.home.categories.CateAdapter
-import com.example.restaurantapp.ui.main.home.categories.CateViewModel
+import com.example.restaurantapp.ui.home.home.categories.CateAdapter
+import com.example.restaurantapp.ui.home.home.categories.CateViewModel
 
 
-import com.example.restaurantapp.ui.main.home.meals.MealAdapter
-import com.example.restaurantapp.ui.main.home.meals.MealsViewModel
+import com.example.restaurantapp.ui.home.home.meals.MealAdapter
+import com.example.restaurantapp.ui.home.home.meals.MealsViewModel
 
 
 import dagger.hilt.android.AndroidEntryPoint

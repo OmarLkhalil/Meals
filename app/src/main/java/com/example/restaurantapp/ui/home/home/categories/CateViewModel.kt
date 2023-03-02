@@ -1,4 +1,4 @@
-package com.example.restaurantapp.ui.main.home.categories
+package com.example.restaurantapp.ui.home.home.categories
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

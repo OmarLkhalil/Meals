@@ -1,10 +1,10 @@
-package com.example.restaurantapp.ui.main.favorite
+package com.example.restaurantapp.ui.home.favorite
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.domain.entity.FavoriteMeal
 import com.example.domain.repo.FavoriteMealRepository
-import com.example.restaurantapp.DataUtils
+import com.example.domain.util.DataUtils
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import dagger.hilt.android.lifecycle.HiltViewModel

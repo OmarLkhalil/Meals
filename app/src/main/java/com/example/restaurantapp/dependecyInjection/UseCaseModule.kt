@@ -43,4 +43,5 @@ object UseCaseModule {
 //    fun getFavoritesUseCase(favoritesDao: FavoriteMealDao): FavoriteUseCase {
 //        return FavoriteUseCase(favoritesDao)
 //    }
+
 }

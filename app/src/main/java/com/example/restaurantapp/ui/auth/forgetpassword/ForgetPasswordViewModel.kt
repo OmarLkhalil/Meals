@@ -1,7 +1,7 @@
 package com.example.restaurantapp.ui.auth.forgetpassword
 
+import android.app.AlertDialog
 import android.content.Context
-import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.navigation.NavController
 import com.example.data.base.BaseViewModel
@@ -42,17 +42,29 @@ class ForgetPasswordViewModel : BaseViewModel(){
             sendResetPassword(email.get()!!)
         }
     }
+
+    private fun showError(errorMessage: String) {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Error")
+        builder.setMessage(errorMessage)
+        builder.setPositiveButton("OK") { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog = builder.create()
+        dialog.show()
+    }
+
     private fun sendResetPassword(email: String) {
         showProgress()
         auth.sendPasswordResetEmail(email)
             .addOnCompleteListener { task ->
                 hideProgress()
                 if (task.isSuccessful) {
-                    messageLiveData.value = "Password reset email sent"
-                    Toast.makeText(context, messageLiveData.value, Toast.LENGTH_SHORT).show()
+                    messageLiveData.value = "Password reset email sent to $email"
+                    showError(messageLiveData.value.toString())
                 } else {
                     messageLiveData.value = task.exception!!.localizedMessage
-                    Toast.makeText(context, messageLiveData.value, Toast.LENGTH_SHORT).show()
+                    showError(messageLiveData.value.toString())
                 }
             }
     }

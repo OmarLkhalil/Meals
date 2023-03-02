@@ -48,4 +48,6 @@ object RepoModule {
     fun provideFavoriteMealRepo(): FavoriteMealRepository{
         return FirestoreFavoriteMealRepositoryImpl()
     }
+
+
 }

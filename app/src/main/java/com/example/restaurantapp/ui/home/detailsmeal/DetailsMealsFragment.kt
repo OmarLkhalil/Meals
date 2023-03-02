@@ -1,4 +1,4 @@
-package com.example.restaurantapp.ui.main.detailsmeal
+package com.example.restaurantapp.ui.home.detailsmeal
 
 import android.content.Intent
 import android.net.Uri
@@ -34,7 +34,6 @@ import com.example.domain.util.hideKeyboard
 
 import com.example.restaurantapp.R
 import com.example.restaurantapp.databinding.FragmentMealsDetailsBinding
-import com.example.restaurantapp.ui.main.favorite.FavoriteMealsViewModel
 
 
 import kotlinx.coroutines.Dispatchers
@@ -46,12 +45,10 @@ import kotlinx.coroutines.withContext
 
 class DetailsMealsFragment : Fragment() {
 
-
     private lateinit var navController: NavController
     private lateinit var binding: FragmentMealsDetailsBinding
     private val args: DetailsMealsFragmentArgs by navArgs()
     private val mealsViewModel by activityViewModels<DetailsMealViewModel>()
-    private val favoriteMealViewModel by activityViewModels<FavoriteMealsViewModel>()
     private var isFavorite = false
 
     override fun onCreateView(
@@ -60,6 +57,7 @@ class DetailsMealsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMealsDetailsBinding.inflate(layoutInflater, container, false)
+        mealsViewModel.context = requireContext()
         return binding.root
     }
 
@@ -182,11 +180,11 @@ class DetailsMealsFragment : Fragment() {
                 if (isFavorite) {
                     Toast.makeText(
                         requireContext(),
-                        "Meal added to favorites",
+                        "${favoriteMeal.strMeal} added to favorites",
                         Toast.LENGTH_SHORT
                     ).show()
                 } else {
-                    Toast.makeText(requireContext(), "Meal removed to favorites", Toast.LENGTH_SHORT)
+                    Toast.makeText(requireContext(), "${favoriteMeal.strMeal} removed to favorites", Toast.LENGTH_SHORT)
                         .show()
                 }
             },

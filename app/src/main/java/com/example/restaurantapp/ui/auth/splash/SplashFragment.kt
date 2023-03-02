@@ -36,33 +36,3 @@ class SplashFragment : Fragment() {
         return binding.root
     }
 }
-
-//    override fun onResume() {
-//        super.onResume()
-//
-//        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-//            override fun onPageSelected(position: Int) {
-//                if (layouts[position] == R.layout.fragement_animation) {
-//                    getStart.visibility = View.GONE
-//
-//                    // start animation and navigate to next fragment after 50 seconds
-//                    Handler().postDelayed({
-//                        // navigate to next fragment
-//                        viewPager.currentItem = position + 1
-//                        viewPager.adapter?.notifyDataSetChanged()
-//                    }, 50000) // 50 seconds delay
-//                } else {
-//                    getStart.visibility = View.VISIBLE
-//                }
-//            }
-//
-//            override fun onPageScrollStateChanged(state: Int) {}
-//
-//            override fun onPageScrolled(
-//                position: Int,
-//                positionOffset: Float,
-//                positionOffsetPixels: Int
-//            ) {}
-//        })
-//    }
-//

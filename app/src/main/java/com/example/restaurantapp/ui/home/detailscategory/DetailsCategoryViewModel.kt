@@ -1,4 +1,4 @@
-package com.example.restaurantapp.ui.main.detailscategory
+package com.example.restaurantapp.ui.home.detailscategory
 
 import androidx.lifecycle.ViewModel
 import com.example.domain.repo.FilterByCateRepo

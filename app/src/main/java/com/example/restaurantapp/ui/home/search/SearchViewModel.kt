@@ -1,4 +1,4 @@
-package com.example.restaurantapp.ui.main.search
+package com.example.restaurantapp.ui.home.search
 
 import androidx.lifecycle.*
 

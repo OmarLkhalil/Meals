@@ -1,4 +1,4 @@
-package com.example.restaurantapp.ui.main.home.meals
+package com.example.restaurantapp.ui.home.home.meals
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

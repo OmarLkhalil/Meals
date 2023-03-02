@@ -18,7 +18,7 @@
         tools:targetApi="tiramisu" >
 
         <activity
-            android:name=".ui.main.detailscategory.DetailsCategoryFragment"
+            android:name=".ui.home.detailscategory.DetailsCategoryFragment"
             android:exported="false" />
 
         <activity

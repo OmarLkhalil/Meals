@@ -1,4 +1,4 @@
-package com.example.restaurantapp.ui.main.setting
+package com.example.restaurantapp.ui.home.setting
 
 import androidx.fragment.app.Fragment
 

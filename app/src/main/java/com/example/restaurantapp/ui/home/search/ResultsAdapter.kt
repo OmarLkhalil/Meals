@@ -1,4 +1,4 @@
-package com.example.restaurantapp.ui.main.home.meals
+package com.example.restaurantapp.ui.home.search
 
 import android.content.Context
 
@@ -22,35 +22,33 @@ import com.bumptech.glide.Glide
 import com.example.domain.entity.MealsItem
 
 
-import com.example.restaurantapp.databinding.MealItemBinding
-import com.example.restaurantapp.ui.main.home.HomeFragmentDirections
+import com.example.restaurantapp.databinding.SearchItemBinding
 
 
-import com.restaurantapp.domain.entity.CategoriesItem
-
-
-class MealAdapter(private val context: Context) : ListAdapter<MealsItem, MealAdapter.ViewHolder>(
+class ResultsAdapter(val context: Context) : ListAdapter<MealsItem, ResultsAdapter.ViewHolder>(
     MealDiffCallback()
 ) {
 
     private lateinit var navController: NavController
-    private lateinit var category: CategoriesItem
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemBinding = MealItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemBinding = SearchItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(itemBinding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val meal = getItem(position)
-        holder.itemBinding.txvMealname.text = meal.strMeal
-        Glide.with(context).load(meal.strMealThumb).into(holder.itemBinding.imvCatemeal)
+        val searchedMealImageUrl = meal.strMealThumb
+        val searchedMealName = meal.strMeal
+
+        holder.itemBinding.resultsName.text = searchedMealName
+        Glide.with(context).load(searchedMealImageUrl).into(holder.itemBinding.resultsImv)
 
         holder.itemView.setOnClickListener{
             navController = Navigation.findNavController(it)
             val action = meal.idMeal?.let { it1 ->
-                HomeFragmentDirections.actionMainFragmentToDetailsFragment(
-                    meal, mealId = it1
+                SearchFragmentDirections.actionSearchFragmentToDetailsFragment(
+                    null,mealId = it1
                 )
             }
             if (action != null) {
@@ -59,19 +57,8 @@ class MealAdapter(private val context: Context) : ListAdapter<MealsItem, MealAda
         }
     }
 
-    class ViewHolder(val itemBinding: MealItemBinding) : RecyclerView.ViewHolder(itemBinding.root)
+    inner class ViewHolder(val itemBinding: SearchItemBinding) : RecyclerView.ViewHolder(itemBinding.root)
 
-
-    fun navigate(category: CategoriesItem){
-        this.category =category
-    }
-
-
-    // The "CategoryDiffCallback" class extends the
-    // "DiffUtil.ItemCallback" class and provides custom implementations
-    // of the "areItemsTheSame" and "areContentsTheSame" methods.
-    // These methods are used by the "ListAdapter" class to determine whether an item has changed
-    // between the old and new data sets, and to update the RecyclerView efficiently.
     class MealDiffCallback : DiffUtil.ItemCallback<MealsItem>() {
         override fun areItemsTheSame(
             oldItem: MealsItem,
@@ -86,6 +73,5 @@ class MealAdapter(private val context: Context) : ListAdapter<MealsItem, MealAda
         ): Boolean {
             return oldItem == newItem
         }
-
     }
 }

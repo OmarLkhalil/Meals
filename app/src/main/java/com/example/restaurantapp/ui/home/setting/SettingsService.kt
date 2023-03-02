@@ -1,4 +1,4 @@
-package com.example.restaurantapp.ui.main.setting
+package com.example.restaurantapp.ui.home.setting
 
 import android.content.Intent
 import android.os.IBinder

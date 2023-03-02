@@ -1,4 +1,4 @@
-package com.example.restaurantapp.ui.main.detailscategory
+package com.example.restaurantapp.ui.home.detailscategory
 
 import android.os.Bundle
 

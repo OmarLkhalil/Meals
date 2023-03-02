@@ -1,4 +1,4 @@
-package com.example.restaurantapp
+package com.example.domain.util
 
 import com.example.domain.entity.AppUser
 
