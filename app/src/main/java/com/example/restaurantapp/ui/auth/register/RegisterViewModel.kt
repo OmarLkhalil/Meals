@@ -1,5 +1,6 @@
 package com.example.restaurantapp.ui.auth.register
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.view.View
@@ -13,16 +14,18 @@ import com.example.domain.util.hide
 import com.example.domain.util.show
 import com.example.restaurantapp.R
 import com.example.restaurantapp.databinding.FragmentRegisterBinding
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 
 @HiltViewModel
-class RegisterViewModel @Inject constructor(private val signUpUseCase: SignUpUseCase) : BaseViewModel() {
+class RegisterViewModel @Inject constructor(val signUpUseCase: SignUpUseCase) : BaseViewModel() {
 
     lateinit var navController: NavController
-
     lateinit var binding: FragmentRegisterBinding
+    lateinit var googleSignInClient: GoogleSignInClient
+
 
     val name = ObservableField<String>()
     val nameError = ObservableField<String>()
@@ -32,6 +35,16 @@ class RegisterViewModel @Inject constructor(private val signUpUseCase: SignUpUse
     val passwordError = ObservableField<String>()
 
 
+    // Sign in with Google
+    fun signInWithGoogle() {
+        val signInIntent = googleSignInClient.signInIntent
+        (context as Activity).startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
+
+    companion object {
+        const val RC_SIGN_IN = 9001
+    }
+
     fun createAccount() {
         if (validate()) {
             addAccountToFireBase()
@@ -40,7 +53,7 @@ class RegisterViewModel @Inject constructor(private val signUpUseCase: SignUpUse
 
     lateinit var context : Context
 
-    private fun showError(errorMessage: String) {
+    fun showError(errorMessage: String) {
         val builder = AlertDialog.Builder(context)
         builder.setTitle("Error")
         builder.setMessage(errorMessage)
